@@ -1,1 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🇬🇧 伦敦 & 白崖摄影之旅 (2026.09.10 - 09.13)</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card-bg: #ffffff;
+      --day-card-bg: #f8fafc;
+      --text: #212529;
+      --text-muted: #6c757d;
+      --primary: #0d6efd;
+      --accent: #d63384;
+      --border: #e2e8f0;
+      --tag-bg: #e7f1ff;
+      --tag-text: #0c63e4;
+      --weather-bg: #f1f5f9;
+      --weather-text: #475569;
+    }
 
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1a1c1e;
+        --card-bg: #25282c;
+        --day-card-bg: #2d3137;
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --primary: #4d8dff;
+        --accent: #f783ac;
+        --border: #363b42;
+        --tag-bg: #032830;
+        --tag-text: #6ea8fe;
+        --weather-bg: #1e293b;
+        --weather-text: #cbd5e1;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 16px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* 密码保护遮罩层样式 (对应图5) */
+    #lock-screen {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--bg);
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .lock-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+    .lock-card h2 { margin-top: 0; font-size: 1.2rem; }
+    .lock-input-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .lock-input-group input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--day-card-bg);
+      color: var(--text);
+      font-size: 1rem;
+    }
+    .lock-input-group button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .lock-options {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* 顶部机票/火车票信息卡片 (对应图2) */
+    .hero-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #ffffff;
+      border: none;
+    }
+    .hero-card .label { font-size: 0.8rem; opacity: 0.8; letter-spacing: 1px; }
+    .hero-card .event { font-size: 1.1rem; font-weight: bold; margin: 6px 0 14px 0; }
+    .ticket-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      background: rgba(255,255,255,0.08);
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: center;
+      font-family: monospace;
+      margin-bottom: 10px;
+    }
+    .ticket-city { font-size: 1.1rem; font-weight: bold; }
+    .ticket-sub { font-size: 0.75px; opacity: 0.7; }
+    .ticket-arrow { font-size: 1rem; opacity: 0.7; }
+    .ticket-info-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      opacity: 0.85;
+      padding: 0 4px;
+    }
+
+    /* 左右滑动滑块容器样式 */
+    .slider-container {
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .slider-track {
+      display: flex;
+      transition: transform 0.3s ease-in-out;
+    }
+    .day-slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+    .slider-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .slider-nav button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .slider-nav button:disabled {
+      background: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+    .slider-indicators {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* 路线图预览组件 (对应图3) */
+    .route-map-preview {
+      background: var(--day-card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+      font-size: 0.85rem;
+    }
+    .route-map-preview b { color: var(--primary); }
+
+    /* 单日行程卡片 (对应图4) */
+    .day-card {
+      background: var(--day-card-bg);
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--border);
+    }
+    .day-header {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 14px;
+      gap: 6px;
+    }
+    .day-header h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--primary);
+    }
+
+    /* 天气组件样式 */
+    .weather-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--weather-bg);
+      color: var(--weather-text);
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      width: fit-content;
+      font-weight: 500;
+    }
+
+    /* 逐日行程时间轴 */
+    .timeline {
+      position: relative;
+      padding-left: 18px;
+      border-left: 2px solid var(--border);
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 16px;
+    }
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -23px;
+      top: 5px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
+    .time {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .content { font-size: 0.92rem; }
+    
+    /* 摄影子模块节点 */
+    .photo-spot {
+      margin-top: 8px;
+      padding-left: 10px;
+      border-left: 2px dashed var(--border);
+    }
+    .photo-spot-item {
+      margin-bottom: 10px;
+    }
+    .photo-spot-item:last-child {
+      margin-bottom: 0;
+    }
+    .spot-title {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .spot-desc {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      margin-left: 4px;
+    }
+
+    a.map-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed var(--primary);
+    }
+    a.map-link:hover { color: var(--primary); }
+
+    /* 底部备忘录样式 (对应图6) */
+    .memo-input-box {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .memo-input-box input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--day-card-bg);
+      color: var(--text);
+    }
+    .memo-input-box button {
+      padding: 8px 14px;
+      border-radius: 8px;
+      border: none;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .memo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .memo-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .memo-item:last-child { border-bottom: none; }
+    .memo-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .memo-item.completed span {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+    .memo-delete {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+    .memo-delete:hover { color: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- 密码访问验证层 (对应图5) -->
+<div id="lock-screen">
+  <div class="lock-card">
+    <h2>🔒 仅限同行者</h2>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">这个行程仅向同行者开放。请输入共享密码继续（初始密码: 2026）。</p>
+    <div class="lock-input-group">
+      <input type="password" id="access-password" placeholder="输入访问密码...">
+      <button onclick="verifyPassword()">确认</button>
+    </div>
+    <div class="lock-options">
+      <input type="checkbox" id="remember-me" checked>
+      <label for="remember-me">在这台设备上保持访问 14 天</label>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="main-content" style="display:none;">
+
+  <!-- 1. 顶部机票/火车票信息卡片 (对应图2) -->
+  <div class="card hero-card">
+    <div class="label">INTERNATIONAL TRANSPORT</div>
+    <div class="event">🚄 欧洲之星往返行程信息</div>
+    <div class="ticket-grid">
+      <div>
+        <div class="ticket-city">BRU / RTM</div>
+        <div class="ticket-sub">鹿特丹发车</div>
+      </div>
+      <div class="ticket-arrow">➔</div>
+      <div>
+        <div class="ticket-city">LON</div>
+        <div class="ticket-sub">伦敦圣潘克拉斯</div>
+      </div>
+    </div>
+    <div class="ticket-info-row">
+      <span>去程: 09月10日 15:28 发车</span>
+      <span>已出票</span>
+    </div>
+  </div>
+
+  <!-- 2. 逐日行程左右滑动滑块区 (对应图1、图3、图4) -->
+  <div class="card">
+    <div class="slider-nav">
+      <button id="prev-btn" onclick="slideDay(-1)" disabled>◀ 前一天</button>
+      <div class="slider-indicators" id="slide-indicator">Day 1 / 4</div>
+      <button id="next-btn" onclick="slideDay(1)">后一天 ▶</button>
+    </div>
+
+    <div class="slider-container">
+      <div class="slider-track" id="slider-track">
+
+        <!-- Day 1 滑块 -->
+        <div class="day-slide">
+          <!-- 当天路线图预览 (对应图3) -->
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 鹿特丹 ➔ 伦敦 ➔ Outernet ➔ Soho ➔ 威斯敏斯特桥 ➔ 伦敦眼
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 1: 9月10日 (周四) · 伦敦</h3>
+              <div class="weather-badge">⛅ 伦敦: 多云 | 16°C - 19°C | 降水 0.0mm (0%)</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">13:30</div><div class="content">🚶 从家出发准备去车站</div></div>
+              <div class="timeline-item"><div class="time">13:44 - 14:07</div><div class="content">🚆 火车: Breda ➔ Rotterdam Centraal</div></div>
+              <div class="timeline-item"><div class="time">14:15 - 15:15</div><div class="content">🛂 鹿特丹 Centraal 办理 Eurostar 安检 & 过海关</div></div>
+              <div class="timeline-item">
+                <div class="time">15:28 - 17:57</div>
+                <div class="content">🚆 <b>Eurostar 往程列车</b> (<a class="map-link" href="https://www.google.com/maps/search/?api=1&query=London+St+Pancras+International" target="_blank">📍 伦敦 St Pancras</a>) <span class="tag">已出票</span></div>
+              </div>
+              <div class="timeline-item"><div class="time">18:30</div><div class="content">办理解理入住民宿</div></div>
+              <div class="timeline-item">
+                <div class="time">19:00 - 22:00</div>
+                <div class="content">
+                  📸 <b>伦敦夜景摄影与夜游路线</b>
+                  <div class="photo-spot">
+                    <div class="photo-spot-item">
+                      <div class="spot-title">📍 第一站: <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Outernet+London" target="_blank">Outernet London</a> <span class="tag">免费无需预约</span></div>
+                      <div class="spot-desc">• 欧最大 16K LED 沉浸式数字艺术空间，适合手持超广角 (16-35mm) 捕捉张力。</div>
+                    </div>
+                    <div class="photo-spot-item">
+                      <div class="spot-title">📍 第二站: Soho & Piccadilly Circus 街景扫街</div>
+                      <div class="spot-desc">• 感受繁华街头与巨大曲面霓虹屏，适合人文街拍。</div>
+                    </div>
+                    <div class="photo-spot-item">
+                      <div class="spot-title">📍 第三站: <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Westminster+Bridge" target="_blank">威斯敏斯特桥</a></div>
+                      <div class="spot-desc">• 经典大本钟夜景，架三脚架慢门（2s-5s，f/8，ISO 100）拍车轨。</div>
+                    </div>
+                    <div class="photo-spot-item">
+                      <div class="spot-title">📍 第四站: <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=The+London+Eye" target="_blank">伦敦眼 & 黄金禧桥</a></div>
+                      <div class="spot-desc">• 俯瞰完整天际线。</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 2 滑块 -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 大英博物馆 ➔ 圣保罗大教堂倒影 ➔ Horizon 22 ➔ 泰晤士河缆车夜航
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 2: 9月11日 (周五) · 伦敦</h3>
+              <div class="weather-badge">🌤️ 伦敦: 多云间晴 | 12°C - 21°C | 微风</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="time">10:00 - 15:30</div>
+                <div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=British+Museum" target="_blank">📍 大英博物馆</a> <span class="tag">已预约 11:10</span></div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">16:00 - 16:30</div>
+                <div class="content">📸 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Reflection+Garden+St+Paul's+Cathedral" target="_blank">📍 圣保罗大教堂水池倒影</a></div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">16:45 - 17:40</div>
+                <div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Horizon+22+London" target="_blank">📍 Horizon 22 观景台</a> <span class="tag">已预约 16:45</span></div>
+              </div>
+              <div class="timeline-item">
+                <div class="time">19:30 - 21:00</div>
+                <div class="content">🚡 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=IFS+Cloud+Cable+Car+Greenwich+Peninsula" target="_blank">📍 IFS Cloud Cable Car 夜航</a> <span class="tag">刷 Contactless</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 3 滑块 -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 伦敦 ➔ 布赖顿 ➔ Seaford ➔ Seven Sisters 白崖徒步 ➔ Beachy Head
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 3: 9月12日 (周六) · 白崖 (Seaford)</h3>
+              <div class="weather-badge">☀️ 白崖: 晴 | 12°C - 21°C | 阵风 26mph</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">08:35 - 09:43</div><div class="content">🚆 火车: London Bridge ➔ Brighton</div></div>
+              <div class="timeline-item"><div class="time">10:06 - 10:48</div><div class="content">🚆 火车: Brighton ➔ <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Seaford+railway+station" target="_blank">Seaford</a> <span class="tag">已出票</span></div></div>
+              <div class="timeline-item"><div class="time">10:59 - 11:08</div><div class="content">🚌 12X 公交: Seaford ➔ Seven Sisters Park Centre</div></div>
+              <div class="timeline-item">
+                <div class="time">11:10 - 17:00</div>
+                <div class="content">📸 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Seven+Sisters+Cliffs" target="_blank">Seven Sisters 白崖</a> 徒步摄影 (约 5.5 - 6 小时)</div>
+              </div>
+              <div class="timeline-item"><div class="time">17:12 - 18:28</div><div class="content">🚌 13X 公交: Beachy Head Centre ➔ Brighton Train Station</div></div>
+              <div class="timeline-item"><div class="time">18:44 - 19:45</div><div class="content">🚆 Thameslink 返程火车 (Brighton ➔ London Bridge) <span class="tag">已出票</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 4 滑块 -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 寄存行李 ➔ Drapers' Hall ➔ Maughan Library ➔ 提取行李 ➔ 鹿特丹
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 4: 9月13日 (周日) · 伦敦返程</h3>
+              <div class="weather-badge">🌤️ 伦敦: 多云间晴 | 14°C - 21°C</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">08:30</div><div class="content">🧳 Kings Cross Computer Centre 寄存行李 <span class="tag">已预约</span></div></div>
+              <div class="timeline-item"><div class="time">09:30 - 11:30</div><div class="content">🏛️ <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Drapers'+Hall+London" target="_blank">Drapers' Hall</a> 宫殿级维多利亚内景</div></div>
+              <div class="timeline-item"><div class="time">13:30 - 15:30</div><div class="content">📚 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Maughan+Library+KCL" target="_blank">Maughan Library</a> 八角形大图书馆</div></div>
+              <div class="timeline-item"><div class="time">16:30</div><div class="content">🧳 提取行李并前往 St Pancras 车站</div></div>
+              <div class="timeline-item"><div class="time">18:04 - 22:32</div><div class="content">🚆 Eurostar 返程列车 (伦敦 ➔ 鹿特丹) <span class="tag">已出票</span></div></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 底部可勾选备忘录 (对应图6) -->
+  <div class="card">
+    <div class="card-title">📝 旅行前准备 & 备忘录</div>
+    <div class="memo-input-box">
+      <input type="text" id="new-memo-input" placeholder="添加一项准备事项...">
+      <button onclick="addMemoItem()">添加</button>
+    </div>
+    <ul class="memo-list" id="memo-list">
+      <!-- 动态生成 -->
+    </ul>
+  </div>
+
+</div>
+
+<script>
+  // 密码验证逻辑 (默认密码: 2026)
+  function verifyPassword() {
+    const pwd = document.getElementById("access-password").value;
+    const remember = document.getElementById("remember-me").checked;
+    if (pwd === "2026") {
+      document.getElementById("lock-screen").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+      if (remember) {
+        localStorage.setItem("trip_auth", "true");
+        localStorage.setItem("trip_auth_time", Date.now());
+      }
+    } else {
+      alert("密码错误，请重新输入（默认密码为 2026）");
+    }
+  }
+
+  // 检查 14 天内是否授权过
+  window.onload = function() {
+    const auth = localStorage.getItem("trip_auth");
+    const authTime = localStorage.getItem("trip_auth_time");
+    const fourteenDays = 14 * 24 * 60 * 60 * 1000;
+    if (auth === "true" && authTime && (Date.now() - authTime < fourteenDays)) {
+      document.getElementById("lock-screen").style.display = "none";
+      document.getElementById("main-content").style.display = "block";
+    }
+  };
+
+  // 左右滑块逻辑
+  let currentSlide = 0;
+  const totalSlides = 4;
+
+  function slideDay(direction) {
+    currentSlide += direction;
+    if (currentSlide < 0) currentSlide = 0;
+    if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+
+    const track = document.getElementById("slider-track");
+    track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    document.getElementById("slide-indicator").innerText = `Day ${currentSlide + 1} / ${totalSlides}`;
+    document.getElementById("prev-btn").disabled = currentSlide === 0;
+    document.getElementById("next-btn").disabled = currentSlide === totalSlides - 1;
+  }
+
+  // 底部备忘录本地存储交互逻辑 (对应图6)
+  let memoItems = JSON.parse(localStorage.getItem("trip_memos")) || [
+    { text: "准备相机电池、存储卡及三脚架", completed: false },
+    { text: "确认伦敦公共交通及缆车支持 Contactless 刷卡", completed: true },
+    { text: "准备周六白崖徒步轻便防风衣与防晒霜", completed: false },
+    { text: "提前预约好行李寄存点 (Kings Cross)", completed: true }
+  ];
+
+  function renderMemos() {
+    const listEl = document.getElementById("memo-list");
+    listEl.innerHTML = "";
+    memoItems.forEach((item, index) => {
+      const li = document.createElement("li");
+      li.className = `memo-item ${item.completed ? 'completed' : ''}`;
+      li.innerHTML = `
+        <div class="memo-item-left" onclick="toggleMemo(${index})">
+          <input type="checkbox" ${item.completed ? 'checked' : ''} style="cursor:pointer;">
+          <span>${item.text}</span>
+        </div>
+        <button class="memo-delete" onclick="deleteMemo(${index})">删除</button>
+      `;
+      listEl.appendChild(li);
+    });
+    localStorage.setItem("trip_memos", JSON.stringify(memoItems));
+  }
+
+  function addMemoItem() {
+    const input = document.getElementById("new-memo-input");
+    const text = input.value.trim();
+    if (text) {
+      memoItems.push({ text: text, completed: false });
+      input.value = "";
+      renderMemos();
+    }
+  }
+
+  function toggleMemo(index) {
+    memoItems[index].completed = !memoItems[index].completed;
+    renderMemos();
+  }
+
+  function deleteMemo(index) {
+    memoItems.splice(index, 1);
+    renderMemos();
+  }
+
+  // 初始化加载备忘录
+  renderMemos();
+</script>
+
+</body>
+</html>
