@@ -1,713 +1,694 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🇮🇹 意大利南部跨年摄影之旅 (2025.12.24 - 2026.01.03)</title>
-  <style>
-    :root {
-      --bg: #f4f6f8;
-      --card-bg: #ffffff;
-      --day-card-bg: #f8fafc;
-      --text: #212529;
-      --text-muted: #6c757d;
-      --primary: #0d6efd;
-      --accent: #d63384;
-      --border: #e2e8f0;
-      --tag-bg: #e7f1ff;
-      --tag-text: #0c63e4;
-      --weather-bg: #f1f5f9;
-      --weather-text: #475569;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIVATE JOURNEY | 意大利南部跨年之旅</title>
+    <!-- Google Fonts: 引入思源黑体与现代无衬线 Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-card-subtle: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --accent-orange: #F97316;
+            --accent-orange-bg: #FFF7ED;
+            --accent-blue: #2563EB;
+            --accent-blue-bg: #EFF6FF;
+            --accent-green: #10B981;
+            --border-color: #E2E8F0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --font-main: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1a1c1e;
-        --card-bg: #25282c;
-        --day-card-bg: #2d3137;
-        --text: #e2e8f0;
-        --text-muted: #94a3b8;
-        --primary: #4d8dff;
-        --accent: #f783ac;
-        --border: #363b42;
-        --tag-bg: #032830;
-        --tag-text: #6ea8fe;
-        --weather-bg: #1e293b;
-        --weather-text: #cbd5e1;
-      }
-    }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            -webkit-tap-highlight-color: transparent;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      margin: 0;
-      padding: 16px;
-      line-height: 1.5;
-    }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
 
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-    }
+        /* 密码锁屏 Overlay */
+        #auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-main);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
 
-    /* 密码保护遮罩层样式 */
-    #lock-screen {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: var(--bg);
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    .lock-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    }
-    .lock-card h2 { margin-top: 0; font-size: 1.2rem; }
-    .lock-input-group {
-      display: flex;
-      gap: 8px;
-      margin-top: 16px;
-    }
-    .lock-input-group input {
-      flex: 1;
-      padding: 10px 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--day-card-bg);
-      color: var(--text);
-      font-size: 1rem;
-    }
-    .lock-input-group button {
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .lock-options {
-      margin-top: 12px;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+        .auth-card {
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 20px;
-      margin-bottom: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    }
+        .auth-header {
+            background: #0F172A;
+            color: #FFFFFF;
+            margin: -32px -24px 24px -24px;
+            padding: 20px 24px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    .card-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+        .auth-header .tag {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #94A3B8;
+        }
 
-    /* 顶部交通信息卡片 */
-    .hero-card {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      color: #ffffff;
-      border: none;
-    }
-    .hero-card .label { font-size: 0.8rem; opacity: 0.8; letter-spacing: 1px; }
-    .hero-card .event { font-size: 1.1rem; font-weight: bold; margin: 6px 0 14px 0; }
-    .ticket-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      background: rgba(255,255,255,0.08);
-      padding: 12px 16px;
-      border-radius: 10px;
-      text-align: center;
-      font-family: monospace;
-      margin-bottom: 10px;
-    }
-    .ticket-city { font-size: 1.1rem; font-weight: bold; }
-    .ticket-sub { font-size: 0.75rem; opacity: 0.7; }
-    .ticket-arrow { font-size: 1rem; opacity: 0.7; }
-    .ticket-info-row {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      opacity: 0.85;
-      padding: 0 4px;
-    }
+        .auth-input-group {
+            position: relative;
+            margin-top: 16px;
+        }
 
-    /* 左右滑动滑块容器样式 */
-    .slider-container {
-      position: relative;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-    .slider-track {
-      display: flex;
-      transition: transform 0.3s ease-in-out;
-    }
-    .day-slide {
-      min-width: 100%;
-      box-sizing: border-box;
-    }
-    .slider-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .slider-nav button {
-      background: var(--primary);
-      color: #fff;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-    .slider-nav button:disabled {
-      background: var(--border);
-      color: var(--text-muted);
-      cursor: not-allowed;
-    }
-    .slider-indicators {
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
+        .auth-input {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--border-color);
+            font-size: 18px;
+            letter-spacing: 4px;
+            outline: none;
+            transition: all 0.2s;
+            background: #F8FAFC;
+        }
 
-    /* 路线图预览组件 */
-    .route-map-preview {
-      background: var(--day-card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      margin-bottom: 12px;
-      font-size: 0.85rem;
-    }
-    .route-map-preview b { color: var(--primary); }
+        .auth-input:focus {
+            border-color: var(--accent-blue);
+            background: #FFFFFF;
+        }
 
-    /* 单日行程卡片 */
-    .day-card {
-      background: var(--day-card-bg);
-      border-radius: 12px;
-      padding: 16px;
-      border: 1px solid var(--border);
-    }
-    .day-header {
-      display: flex;
-      flex-direction: column;
-      margin-bottom: 14px;
-      gap: 6px;
-    }
-    .day-header h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      color: var(--primary);
-    }
+        .btn-submit {
+            width: 100%;
+            margin-top: 20px;
+            background: #0F172A;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
 
-    /* 天气组件样式 */
-    .weather-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--weather-bg);
-      color: var(--weather-text);
-      font-size: 0.8rem;
-      padding: 4px 10px;
-      border-radius: 20px;
-      width: fit-content;
-      font-weight: 500;
-    }
+        .btn-submit:active {
+            background: #1E293B;
+        }
 
-    /* 逐日行程时间轴 */
-    .timeline {
-      position: relative;
-      padding-left: 18px;
-      border-left: 2px solid var(--border);
-    }
-    .timeline-item {
-      position: relative;
-      margin-bottom: 16px;
-    }
-    .timeline-item:last-child {
-      margin-bottom: 0;
-    }
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -23px;
-      top: 5px;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--primary);
-    }
-    .time {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--primary);
-    }
-    .content { font-size: 0.92rem; }
-    
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 2px 6px;
-      border-radius: 4px;
-      background: var(--tag-bg);
-      color: var(--tag-text);
-      margin-left: 4px;
-    }
+        /* 顶部 Main Header */
+        .app-header {
+            padding: 24px 20px 12px;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border-color);
+        }
 
-    .tag-warning {
-      background: #f8d7da;
-      color: #842029;
-    }
+        .sub-header-tag {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
 
-    a.map-link {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px dashed var(--primary);
-    }
-    a.map-link:hover { color: var(--primary); }
+        .main-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
 
-    /* 底部备忘录样式 */
-    .memo-input-box {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 14px;
-    }
-    .memo-input-box input {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--day-card-bg);
-      color: var(--text);
-    }
-    .memo-input-box button {
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: none;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .memo-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .memo-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.9rem;
-    }
-    .memo-item:last-child { border-bottom: none; }
-    .memo-item-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-    .memo-item.completed span {
-      text-decoration: line-through;
-      color: var(--text-muted);
-    }
-    .memo-delete {
-      background: none;
-      border: none;
-      color: var(--text-muted);
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-    .memo-delete:hover { color: var(--accent); }
-  </style>
+        .date-range {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 机票机票卡片 */
+        .flight-card {
+            background: #0F172A;
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.15);
+        }
+
+        .flight-card-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #94A3B8;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed #334155;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .flight-route {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .airport-code {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .airport-name {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-top: 2px;
+        }
+
+        .flight-arrow {
+            color: var(--accent-orange);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flight-arrow svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .flight-details {
+            background: #1E293B;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        /* 横向滚动日期栏 */
+        .section-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin: 24px 0 12px;
+        }
+
+        .date-slider {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .date-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-tab {
+            flex: 0 0 auto;
+            width: 110px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .date-tab.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+
+        .date-tab .tab-date {
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .date-tab .tab-city {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 4px;
+            opacity: 0.8;
+        }
+
+        /* 每日详细行程节点 */
+        .timeline-card {
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .map-box {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        .map-title {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .node-list {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .node-list::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #E2E8F0;
+        }
+
+        .node-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .node-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .node-dot {
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 3px solid var(--accent-blue);
+        }
+
+        .node-item.transport .node-dot {
+            border-color: var(--text-muted);
+            width: 10px;
+            height: 10px;
+            left: -18px;
+        }
+
+        .node-content {
+            background: #F8FAFC;
+            padding: 12px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid #F1F5F9;
+        }
+
+        .node-title-zh {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .node-title-en {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .node-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .tag-ticket-need {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .tag-ticket-done {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .tag-free {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .node-transport-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 4px 0;
+            font-style: italic;
+        }
+
+        /* 备忘录清单 */
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #F8FAFC;
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+        }
+
+        .todo-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-orange);
+        }
+
+        .todo-item.done span {
+            text-decoration: line-through;
+            color: var(--text-muted);
+        }
+    </style>
 </head>
 <body>
 
-<!-- 密码访问验证层 -->
-<div id="lock-screen">
-  <div class="lock-card">
-    <h2>🔒 意大利南部之旅</h2>
-    <p style="font-size: 0.85rem; color: var(--text-muted);">请输入共享密码继续（初始密码: 2026）。</p>
-    <div class="lock-input-group">
-      <input type="password" id="access-password" placeholder="输入访问密码...">
-      <button onclick="verifyPassword()">确认</button>
-    </div>
-    <div class="lock-options">
-      <input type="checkbox" id="remember-me" checked>
-      <label for="remember-me">在这台设备上保持访问 14 天</label>
-    </div>
-  </div>
-</div>
-
-<div class="container" id="main-content" style="display:none;">
-
-  <!-- 1. 顶部往返交通信息卡片 -->
-  <div class="card hero-card">
-    <div class="label">INTERNATIONAL TRANSPORT</div>
-    <div class="event">✈️ Breda ➔ 布鲁塞尔 ➔ 罗马 / 索伦托 ➔ 那不勒斯 ➔ 阿姆 ➔ Breda</div>
-    <div class="ticket-grid">
-      <div>
-        <div class="ticket-city">BREDA</div>
-        <div class="ticket-sub">出发地</div>
-      </div>
-      <div class="ticket-arrow">➔</div>
-      <div>
-        <div class="ticket-city">ROM / NAP</div>
-        <div class="ticket-sub">罗马 / 意南</div>
-      </div>
-    </div>
-    <div class="ticket-info-row">
-      <span>去程: 12月24日 17:42 发车</span>
-      <span>回程: 1月3日 阿姆归程</span>
-    </div>
-  </div>
-
-  <!-- 2. 逐日行程左右滑动滑块区 (共10天) -->
-  <div class="card">
-    <div class="slider-nav">
-      <button id="prev-btn" onclick="slideDay(-1)" disabled>◀ 前一天</button>
-      <div class="slider-indicators" id="slide-indicator">Day 1 / 10</div>
-      <button id="next-btn" onclick="slideDay(1)">后一天 ▶</button>
+    <!-- 密码验证层 -->
+    <div id="auth-overlay">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div>
+                    <div class="tag">PRIVATE JOURNEY</div>
+                    <div style="font-size: 18px; font-weight: 800; margin-top: 2px;">受保护的行程单</div>
+                </div>
+                <div style="font-size: 20px;">🔒</div>
+            </div>
+            <p style="font-size: 13px; color: var(--text-secondary);">请输入访问密码查看详细行程安排</p>
+            <div class="auth-input-group">
+                <input type="password" id="pass-input" class="auth-input" placeholder="输入密码">
+            </div>
+            <button class="btn-submit" onclick="checkAuth()">解锁查看行程</button>
+            <p id="auth-err" style="color: #DC2626; font-size: 12px; margin-top: 10px; display: none;">密码错误，请重新输入</p>
+        </div>
     </div>
 
-    <div class="slider-container">
-      <div class="slider-track" id="slider-track">
-
-        <!-- Day 1: Dec 24 -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> Breda ➔ 布鲁塞尔(BRU) ➔ 罗马(FCO) ➔ 民宿
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 1: 12月24日 (周四) · 罗马</h3>
-              <div class="weather-badge">🌤️ 罗马: 多云 | 8°C - 14°C</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">出行准备</div><div class="content">出门去 Breda 火车站</div></div>
-              <div class="timeline-item"><div class="time">17:42 - 18:49</div><div class="content">🚆 火车: Breda ➔ 布鲁塞尔 BRU <span class="tag">提前买票 €17.3</span></div></div>
-              <div class="timeline-item"><div class="time">20:55 - 23:00</div><div class="content">✈️ 航班: 布鲁塞尔 BRU ➔ 罗马 FCO</div></div>
-              <div class="timeline-item"><div class="time">深夜</div><div class="content">罗马 FCO 机场 ➔ 民宿入住</div></div>
-            </div>
-          </div>
+    <!-- 主界面内容 -->
+    <div class="app-header">
+        <div class="container">
+            <div class="sub-header-tag">SWITZERLAND — ITALY</div>
+            <div class="main-title">意大利南部跨年之旅</div>
+            <div class="date-range">2026年12月24日 — 2027年1月3日 · 10天</div>
         </div>
-
-        <!-- Day 2: Dec 25 -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 特莱维喷泉 ➔ 西班牙广场 ➔ 万神殿周边 ➔ 真理之口 ➔ 贾尼科洛山
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 2: 12月25日 (周四/圣诞节) · 罗马</h3>
-              <div class="weather-badge">☀️ 罗马: 晴间多云 | 7°C - 13°C</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">清晨</div><div class="content">民宿出发，早上人少出片</div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Trevi+Fountain" target="_blank">📍 特莱维喷泉 (Trevi Fountain)</a></div></div>
-              <div class="timeline-item"><div class="time">步行 10 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Spanish+Steps" target="_blank">📍 西班牙广场 (Spanish Steps)</a></div></div>
-              <div class="timeline-item"><div class="time">步行 20 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Temple+of+Aesculapius" target="_blank">📍 Temple of Aesculapius</a> (电车150F Victor Hugo - Farini)</div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Papal+Basilica+of+Saint+Mary+Major" target="_blank">📍 圣母大殿 (Papal Basilica of Saint Mary Major)</a> (公交70 Ara Coeli - S. Maria Maggiore)</div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Portico+of+the+Harmonious+Gods" target="_blank">📍 Portico of the Harmonious Gods</a></div></div>
-              <div class="timeline-item"><div class="time">步行 7 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Bocca+della+Verita" target="_blank">📍 真理之口 (Mouth of Truth)</a> (在外面看)</div></div>
-              <div class="timeline-item"><div class="time">步行 20 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Keyhole+of+the+Order+of+Malta" target="_blank">📍 马耳他骑士团钥匙孔 (Keyhole of the Order of Malta)</a> (公交车75/115)</div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Passeggiata+del+Gianicolo" target="_blank">📍 贾尼科洛山观景台 (Passeggiata del Gianicolo)</a> & 丰塔纳湖 (Fontana dell'Acqua Paola)</div></div>
-              <div class="timeline-item"><div class="time">夜晚</div><div class="content">回民宿休息</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 3: Dec 26 -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 万神殿 ➔ 圣依纳爵堂 ➔ 罗马斗兽场 ➔ 古罗马广场 ➔ 维托里安诺
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 3: 12月26日 (周六) · 罗马</h3>
-              <div class="weather-badge">🌤️ 罗马: 晴间多云 | 6°C - 13°C</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">出发</div><div class="content">民宿出发</div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pantheon+Rome" target="_blank">📍 万神殿 (Pantheon)</a> <span class="tag">11月1号 预约/买票 €7</span></div></div>
-              <div class="timeline-item"><div class="time">步行 3 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Chiesa+di+Sant'Ignazio+di+Loyola" target="_blank">📍 圣依纳爵堂 (Chiesa di Sant'Ignazio di Loyola)</a> <span class="tag">免预约/门票</span> (公交51/85)</div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Colosseum" target="_blank">📍 罗马斗兽场 (Colosseum)</a> <span class="tag tag-warning">11月26号 预约/买票 €18</span></div></div>
-              <div class="timeline-item"><div class="time">步行 5 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Roman+Forum" target="_blank">📍 古罗马广场 (Roman Forum)</a> <span class="tag">Colosseum通票</span></div></div>
-              <div class="timeline-item"><div class="time">步行 5 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Monumento+a+Vittorio+Emanuele+II" target="_blank">📍 维托里安诺 / 埃马努埃莱二世纪念碑</a> <span class="tag tag-warning">9月27号 预约/买票 €18</span></div></div>
-              <div class="timeline-item"><div class="time">夜晚</div><div class="content">回民宿</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 4: Dec 27 -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 梵蒂冈博物馆 ➔ 西斯廷礼拜堂 ➔ 圣彼得大教堂 ➔ 圣天使堡 ➔ 翁贝托一世桥
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 4: 12月27日 (周日) · 罗马/梵蒂冈</h3>
-              <div class="weather-badge">⛅ 罗马: 多云 | 7°C - 12°C</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">出发</div><div class="content">民宿出发</div></div>
-              <div class="timeline-item"><div class="time">09:00 到场</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vatican+Museums" target="_blank">📍 梵蒂冈博物馆 & 西斯廷礼拜堂</a> <span class="tag tag-warning">已预约 9:00 到现场</span></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Saint+Peter's+Basilica" target="_blank">📍 圣彼得大教堂 (Saint Peter's Basilica)</a></div></div>
-              <div class="timeline-item"><div class="time">步行 11 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Monument+di+Santa+Caterina+da+Siena" target="_blank">📍 Monument di Santa Caterina da Siena</a></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo" target="_blank">📍 圣天使堡 (Castel Sant'Angelo)</a></div></div>
-              <div class="timeline-item"><div class="time">步行 6 分钟</div><div class="content"></div></div>
-              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Ponte+Umberto+I" target="_blank">📍 翁贝托一世桥 (Ponte Umberto I)</a> 摄影点</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 5: Dec 28 -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 罗马 ➔ 高铁 ➔ 那不勒斯 (Napoli)
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 5: 12月28日 (周一) · 罗马 ➔ 那不勒斯</h3>
-              <div class="weather-badge">🌤️ 那不勒斯: 多云 | 9°C - 14°C</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">上午</div><div class="content">民宿出发去罗马 Termini 火车站</div></div>
-              <div class="timeline-item">
-                <div class="time">11:24 - 12:33</div>
-                <div class="content">🚆 <b>高铁: 罗马 Termini ➔ 那不勒斯 Centrale</b> <span class="tag">已出票 €45,80 (Frecciarossa 9611)</span></div>
-              </div>
-              <div class="timeline-item"><div class="time">下午</div><div class="content">那不勒斯民宿入住与休整</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 6: Dec 29 (留空待补充) -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 那不勒斯 (行程待补充)
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 6: 12月29日 (周二) · 那不勒斯</h3>
-              <div class="weather-badge">⛅ 那不勒斯: 天气待定</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">全天</div><div class="content">行程规划中，待您补充...</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 7: Dec 30 (留空待补充) -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 那不勒斯 ➔ 索伦托
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 7: 12月30日 (周三) · 那不勒斯 ➔ 索伦托</h3>
-              <div class="weather-badge">🌤️ 索伦托: 天气待定</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">11:00</div><div class="content">租车取车 (自驾 1.5h 那不勒斯 ➔ 索伦托)</div></div>
-              <div class="timeline-item"><div class="time">下午</div><div class="content">入住索伦托民宿</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 8: Dec 31 (留空待补充) -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 索伦托 (跨年夜)
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 8: 12月31日 (周四/跨年夜) · 索伦托</h3>
-              <div class="weather-badge">🎆 索伦托: 跨年夜天气待定</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">全天</div><div class="content">索伦托跨年行程规划中，待您补充...</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 9: Jan 01 (留空待补充) -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 索伦托 (新年)
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 9: 1月1日 (周五/元旦) · 索伦托</h3>
-              <div class="weather-badge">☀️ 索伦托: 新年天气待定</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">全天</div><div class="content">新年行程规划中，待您补充...</div></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Day 10: Jan 02-03 -->
-        <div class="day-slide">
-          <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 索伦托 ➔ 那不勒斯NAP ➔ 阿姆AMS ➔ Breda
-          </div>
-          <div class="day-card">
-            <div class="day-header">
-              <h3>Day 10: 1月2日 - 3日 (周六-周日) · 返程</h3>
-              <div class="weather-badge">✈️ 返程天气</div>
-            </div>
-            <div class="timeline">
-              <div class="timeline-item"><div class="time">1月2日</div><div class="content">索伦托 ➔ 那不勒斯 (准备返程)</div></div>
-              <div class="timeline-item"><div class="time">1月3日</div><div class="content">那不勒斯 NAP ➔ 阿姆 AMS ➔ Breda</div></div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
-  </div>
 
-  <!-- 3. 底部可勾选备忘录 -->
-  <div class="card">
-    <div class="card-title">📝 意南跨年准备 & 备忘录</div>
-    <div class="memo-input-box">
-      <input type="text" id="new-memo-input" placeholder="添加一项准备事项...">
-      <button onclick="addMemoItem()">添加</button>
-    </div>
-    <ul class="memo-list" id="memo-list">
-      <!-- 动态生成 -->
-    </ul>
-  </div>
+    <div class="container">
 
-</div>
-
-<script>
-  // 密码验证逻辑 (默认密码: 2026)
-  function verifyPassword() {
-    const pwd = document.getElementById("access-password").value;
-    const remember = document.getElementById("remember-me").checked;
-    if (pwd === "2026") {
-      document.getElementById("lock-screen").style.display = "none";
-      document.getElementById("main-content").style.display = "block";
-      if (remember) {
-        localStorage.setItem("italy_trip_auth", "true");
-        localStorage.setItem("italy_trip_auth_time", Date.now());
-      }
-    } else {
-      alert("密码错误，请重新输入（默认密码为 2026）");
-    }
-  }
-
-  window.onload = function() {
-    const auth = localStorage.getItem("italy_trip_auth");
-    const authTime = localStorage.getItem("italy_trip_auth_time");
-    const fourteenDays = 14 * 24 * 60 * 60 * 1000;
-    if (auth === "true" && authTime && (Date.now() - authTime < fourteenDays)) {
-      document.getElementById("lock-screen").style.display = "none";
-      document.getElementById("main-content").style.display = "block";
-    }
-  };
-
-  // 左右滑块逻辑 (共10天)
-  let currentSlide = 0;
-  const totalSlides = 10;
-
-  function slideDay(direction) {
-    currentSlide += direction;
-    if (currentSlide < 0) currentSlide = 0;
-    if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
-
-    const track = document.getElementById("slider-track");
-    track.style.transform = `translateX(-${currentSlide * 100}%)`;
-
-    document.getElementById("slide-indicator").innerText = `Day ${currentSlide + 1} / ${totalSlides}`;
-    document.getElementById("prev-btn").disabled = currentSlide === 0;
-    document.getElementById("next-btn").disabled = currentSlide === totalSlides - 1;
-  }
-
-  // 底部备忘录本地存储交互逻辑
-  let memoItems = JSON.parse(localStorage.getItem("italy_trip_memos")) || [
-    { text: "已买好 12月28日 罗马-那不勒斯高铁票 (Frecciarossa 9611)", completed: true },
-    { text: "确认 12月26日 斗兽场 (€18) 与 维托里安诺门票", completed: true },
-    { text: "确认 12月27日 梵蒂冈博物馆 9:00 预约", completed: true },
-    { text: "提前准备好 12月30日 租车及自驾索伦托相关证件", completed: false }
-  ];
-
-  function renderMemos() {
-    const listEl = document.getElementById("memo-list");
-    listEl.innerHTML = "";
-    memoItems.forEach((item, index) => {
-      const li = document.createElement("li");
-      li.className = `memo-item ${item.completed ? 'completed' : ''}`;
-      li.innerHTML = `
-        <div class="memo-item-left" onclick="toggleMemo(${index})">
-          <input type="checkbox" ${item.completed ? 'checked' : ''} style="cursor:pointer;">
-          <span>${item.text}</span>
+        <!-- 真实机票卡片 -->
+        <div class="flight-card">
+            <div class="flight-card-top">
+                <span>FLIGHT 01 / 01 · EASYJET</span>
+                <span>EJU2988</span>
+            </div>
+            <div class="flight-route">
+                <div>
+                    <div class="airport-code">BRU</div>
+                    <div class="airport-name">Brussels Intl</div>
+                    <div style="font-size: 12px; margin-top: 4px; font-weight: 700; color: #F8FAFC;">24 Dec · 20:55</div>
+                </div>
+                <div class="flight-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+                    <span style="font-size: 10px; color: #94A3B8; margin-top: 2px;">2h 05m</span>
+                </div>
+                <div style="text-align: right;">
+                    <div class="airport-code">FCO</div>
+                    <div class="airport-name">Rome Fiumicino</div>
+                    <div style="font-size: 12px; margin-top: 4px; font-weight: 700; color: #F8FAFC;">24 Dec · 23:00</div>
+                </div>
+            </div>
+            <div class="flight-details">
+                <span>预订代码: <strong style="color: var(--accent-orange);">KDDKF95</strong></span>
+                <span>航站楼: <strong>T1</strong></span>
+            </div>
         </div>
-        <button class="memo-delete" onclick="deleteMemo(${index})">删除</button>
-      `;
-      listEl.appendChild(li);
-    });
-    localStorage.setItem("italy_trip_memos", JSON.stringify(memoItems));
-  }
 
-  function addMemoItem() {
-    const input = document.getElementById("new-memo-input");
-    const text = input.value.trim();
-    if (text) {
-      memoItems.push({ text: text, completed: false });
-      input.value = "";
-      renderMemos();
-    }
-  }
+        <!-- 横向滚动日期栏 -->
+        <div class="section-title">ITINERARY / 日程选择</div>
+        <div class="date-slider">
+            <div class="date-tab active" onclick="switchDay(0)">
+                <div class="tab-date">Dec-25 Fri</div>
+                <div class="tab-city">罗马</div>
+            </div>
+            <div class="date-tab" onclick="switchDay(1)">
+                <div class="tab-date">Dec-26 Sat</div>
+                <div class="tab-city">罗马</div>
+            </div>
+            <div class="date-tab" onclick="switchDay(2)">
+                <div class="tab-date">Dec-27 Sun</div>
+                <div class="tab-city">罗马 / 梵蒂冈</div>
+            </div>
+            <div class="date-tab" onclick="switchDay(3)">
+                <div class="tab-date">Dec-28 Mon</div>
+                <div class="tab-city">罗马 ➔ 那不勒斯</div>
+            </div>
+            <div class="date-tab" onclick="switchDay(4)">
+                <div class="tab-date">Dec-29 Tue</div>
+                <div class="tab-city">庞贝 / 赫库兰尼姆</div>
+            </div>
+            <div class="date-tab" onclick="switchDay(5)">
+                <div class="tab-date">Dec-30 Wed</div>
+                <div class="tab-city">索伦托</div>
+            </div>
+        </div>
 
-  function toggleMemo(index) {
-    memoItems[index].completed = !memoItems[index].completed;
-    renderMemos();
-  }
+        <!-- 详细行程区 -->
+        <div class="timeline-card" id="timeline-container">
+            <!-- JavaScript 动态渲染内容 -->
+        </div>
 
-  function deleteMemo(index) {
-    memoItems.splice(index, 1);
-    renderMemos();
-  }
+        <!-- 检查清单 -->
+        <div class="section-title">CHECKLIST / 准备清单</div>
+        <div class="timeline-card">
+            <div class="todo-item"><input type="checkbox" checked> <span>护照与申根签证</span></div>
+            <div class="todo-item"><input type="checkbox" checked> <span>预订机票/车票 PDF 备份</span></div>
+            <div class="todo-item"><input type="checkbox"> <span>万神殿门票（11月1日买票）</span></div>
+            <div class="todo-item"><input type="checkbox"> <span>斗兽场门票（11月26日买票）</span></div>
+        </div>
 
-  renderMemos();
-</script>
+    </div>
 
+    <script>
+        const CORRECT_PASS = "8848E";
+
+        function checkAuth() {
+            const input = document.getElementById('pass-input').value;
+            if (input === CORRECT_PASS) {
+                document.getElementById('auth-overlay').style.display = 'none';
+                localStorage.setItem('auth_ok', '1');
+            } else {
+                document.getElementById('auth-err').style.display = 'block';
+            }
+        }
+
+        if (localStorage.getItem('auth_ok') === '1') {
+            document.getElementById('auth-overlay').style.display = 'none';
+        }
+
+        // 详细日程数据
+        const daysData = [
+            {
+                date: "Dec-25 Fri",
+                city: "罗马",
+                svgMap: `
+                    <svg viewBox="0 0 400 160" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <!-- 台伯河 -->
+                        <path d="M 50 0 C 80 40, 120 80, 180 100 C 240 120, 280 130, 320 160" fill="none" stroke="#93C5FD" stroke-width="14"/>
+                        <!-- 路线折线 -->
+                        <polyline points="280,30  220,25  180,45  150,70  130,100  110,130" fill="none" stroke="#F97316" stroke-width="3" stroke-dasharray="4,4"/>
+                        <!-- 打卡点 Pin -->
+                        <circle cx="280" cy="30" r="5" fill="#2563EB"/><text x="288" y="34" font-size="10" font-weight="700">许愿池</text>
+                        <circle cx="220" cy="25" r="5" fill="#2563EB"/><text x="220" y="18" font-size="10" font-weight="700">西班牙阶梯</text>
+                        <circle cx="180" cy="45" r="5" fill="#2563EB"/><text x="188" y="50" font-size="10" font-weight="700">医神庙</text>
+                        <circle cx="150" cy="70" r="5" fill="#2563EB"/><text x="158" y="75" font-size="10" font-weight="700">圣母大殿</text>
+                        <circle cx="130" cy="100" r="5" fill="#2563EB"/><text x="138" y="105" font-size="10" font-weight="700">真理之口</text>
+                        <circle cx="110" cy="130" r="5" fill="#2563EB"/><text x="118" y="135" font-size="10" font-weight="700">贾尼科洛山</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', titleZh: '民宿出发', titleEn: 'Departure from Airbnb' },
+                    { type: 'spot', titleZh: '特莱维喷泉 (许愿池)', titleEn: 'Trevi Fountain', tag: '早起人少出片', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚶 走路 10 min' },
+                    { type: 'spot', titleZh: '西班牙阶梯', titleEn: 'Spanish Steps', tag: '经典打卡', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚶 走路 20 min' },
+                    { type: 'spot', titleZh: '博尔盖塞公园医神庙', titleEn: 'Temple of Aesculapius', tag: '湖畔公园景观', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚃 电车 150F (Victor Hugo ➔ Farini)' },
+                    { type: 'spot', titleZh: '圣母大殿', titleEn: 'Papal Basilica of Saint Mary Major', tag: '免费参观', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚌 公车 70 (Ara Coeli ➔ S. Maria Maggiore)' },
+                    { type: 'spot', titleZh: '古罗马广场视角', titleEn: 'Widok na Forum Romanum', tag: '俯瞰古迹', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚶 走路 7 min' },
+                    { type: 'spot', titleZh: '真理之口', titleEn: 'Mouth of Truth', tag: '在外围观赏拍照', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚶 走路 20 min' },
+                    { type: 'spot', titleZh: '马耳他骑士团钥匙孔', titleEn: 'Keyhole of the Order of Malta', tag: '偷窥梵蒂冈圣彼得大教堂', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚌 公车 75 / 115' },
+                    { type: 'spot', titleZh: '贾尼科洛林荫大道', titleEn: 'Passeggiata del Gianicolo', tag: '罗马全景日落点', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚶 走路 5 min' },
+                    { type: 'spot', titleZh: '保禄喷泉', titleEn: "Fontana dell'Acqua Paola", tag: '绝美喷泉视角', tagClass: 'tag-free' },
+                    { type: 'end', titleZh: '返回民宿', titleEn: 'Back to Airbnb' }
+                ]
+            },
+            {
+                date: "Dec-26 Sat",
+                city: "罗马",
+                svgMap: `
+                    <svg viewBox="0 0 400 160" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <!-- 万神殿与斗兽场区域线段 -->
+                        <path d="M 120 40 L 160 40 L 240 80 L 220 120 L 180 110" fill="none" stroke="#2563EB" stroke-width="3" stroke-dasharray="4,4"/>
+                        <circle cx="120" cy="40" r="6" fill="#DC2626"/><text x="100" y="30" font-size="10" font-weight="700">万神殿 €7</text>
+                        <circle cx="160" cy="40" r="5" fill="#2563EB"/><text x="165" y="32" font-size="10" font-weight="700">圣依纳爵堂</text>
+                        <circle cx="240" cy="80" r="6" fill="#DC2626"/><text x="250" y="85" font-size="10" font-weight="700">斗兽场 €18</text>
+                        <circle cx="220" cy="120" r="5" fill="#2563EB"/><text x="230" y="125" font-size="10" font-weight="700">古罗马广场</text>
+                        <circle cx="180" cy="110" r="6" fill="#DC2626"/><text x="120" y="125" font-size="10" font-weight="700">祖国祭坛 €18</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', titleZh: '民宿出发', titleEn: 'Departure from Airbnb' },
+                    { type: 'spot', titleZh: '万神殿', titleEn: 'Pantheon', tag: '计划11月1日购票 · €7', tagClass: 'tag-ticket-need' },
+                    { type: 'trans', text: '🚶 走路 3 min' },
+                    { type: 'spot', titleZh: '圣依纳爵堂', titleEn: "Chiesa di Sant'Ignazio di Loyola", tag: '免预约门票', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚌 公车 51 / 85' },
+                    { type: 'spot', titleZh: '罗马斗兽场', titleEn: 'Colosseum', tag: '计划11月26日购票 · €18', tagClass: 'tag-ticket-need' },
+                    { type: 'trans', text: '🚶 走路 5 min' },
+                    { type: 'spot', titleZh: '古罗马广场', titleEn: 'Roman Forum', tag: '含在斗兽场通票内', tagClass: 'tag-ticket-done' },
+                    { type: 'trans', text: '🚶 走路 5 min' },
+                    { type: 'spot', titleZh: '威尼斯广场祖国祭坛', titleEn: 'Monument to Victor Emmanuel II', tag: '计划9月27日预约 · €18', tagClass: 'tag-ticket-need' },
+                    { type: 'end', titleZh: '返回民宿', titleEn: 'Back to Airbnb' }
+                ]
+            },
+            {
+                date: "Dec-27 Sun",
+                city: "罗马 / 梵蒂冈",
+                svgMap: `
+                    <svg viewBox="0 0 400 160" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 80 80 C 120 50, 200 60, 300 70" fill="none" stroke="#10B981" stroke-width="3"/>
+                        <circle cx="80" cy="80" r="6" fill="#059669"/><text x="50" y="100" font-size="10" font-weight="700">梵蒂冈博物馆 (09:00)</text>
+                        <circle cx="180" cy="60" r="5" fill="#2563EB"/><text x="170" y="45" font-size="10" font-weight="700">圣天使城堡</text>
+                        <circle cx="300" cy="70" r="5" fill="#2563EB"/><text x="290" y="90" font-size="10" font-weight="700">翁贝托一世桥</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', titleZh: '民宿出发', titleEn: 'Departure from Airbnb' },
+                    { type: 'spot', titleZh: '梵蒂冈博物馆 / 西斯廷教堂 / 圣彼得大教堂', titleEn: "Vatican Museums / Sistine Chapel / St. Peter's", tag: '已预约 09:00 到现场', tagClass: 'tag-ticket-done' },
+                    { type: 'trans', text: '🚶 走路 11 min' },
+                    { type: 'spot', titleZh: '圣天使城堡', titleEn: "Castel Sant'Angelo", tag: '经典外围打卡/视角', tagClass: 'tag-free' },
+                    { type: 'trans', text: '🚶 走路 6 min' },
+                    { type: 'spot', titleZh: '翁贝托一世桥', titleEn: 'Ponte Umberto I', tag: '圣彼得大教堂远景拍摄点', tagClass: 'tag-free' },
+                    { type: 'end', titleZh: '返回民宿', titleEn: 'Back to Airbnb' }
+                ]
+            }
+        ];
+
+        function switchDay(index) {
+            // 切换 Tab 样式
+            const tabs = document.querySelectorAll('.date-tab');
+            tabs.forEach((tab, i) => {
+                if (i === index) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
+
+            // 渲染内容
+            const day = daysData[index];
+            const container = document.getElementById('timeline-container');
+
+            if (!day) {
+                container.innerHTML = `<p style="text-align:center; color: var(--text-muted); padding: 40px 0;">行程规划制作中...</p>`;
+                return;
+            }
+
+            let html = `
+                <div class="map-box">
+                    <div class="map-title">ROUTE MAP / 当日路线图示</div>
+                    ${day.svgMap}
+                </div>
+                <div class="node-list">
+            `;
+
+            day.nodes.forEach(node => {
+                if (node.type === 'trans') {
+                    html += `<div class="node-item transport"><div class="node-dot"></div><div class="node-transport-text">${node.text}</div></div>`;
+                } else {
+                    html += `
+                        <div class="node-item">
+                            <div class="node-dot"></div>
+                            <div class="node-content">
+                                <div class="node-title-zh">${node.titleZh}</div>
+                                <div class="node-title-en">${node.titleEn}</div>
+                                ${node.tag ? `<span class="node-tag ${node.tagClass}">${node.tag}</span>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // 默认初始化加载第 1 天
+        switchDay(0);
+    </script>
 </body>
 </html>
