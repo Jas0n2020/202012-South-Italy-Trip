@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🇬🇧 伦敦 & 白崖摄影之旅 (2026.09.10 - 09.13)</title>
+  <title>🇮🇹 意大利南部跨年摄影之旅 (2025.12.24 - 2026.01.03)</title>
   <style>
     :root {
       --bg: #f4f6f8;
@@ -51,7 +51,7 @@
       margin: 0 auto;
     }
 
-    /* 密码保护遮罩层样式 (对应图5) */
+    /* 密码保护遮罩层样式 */
     #lock-screen {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -124,7 +124,7 @@
       gap: 8px;
     }
 
-    /* 顶部机票/火车票信息卡片 (对应图2) */
+    /* 顶部交通信息卡片 */
     .hero-card {
       background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
       color: #ffffff;
@@ -144,7 +144,7 @@
       margin-bottom: 10px;
     }
     .ticket-city { font-size: 1.1rem; font-weight: bold; }
-    .ticket-sub { font-size: 0.75px; opacity: 0.7; }
+    .ticket-sub { font-size: 0.75rem; opacity: 0.7; }
     .ticket-arrow { font-size: 1rem; opacity: 0.7; }
     .ticket-info-row {
       display: flex;
@@ -194,7 +194,7 @@
       color: var(--primary);
     }
 
-    /* 路线图预览组件 (对应图3) */
+    /* 路线图预览组件 */
     .route-map-preview {
       background: var(--day-card-bg);
       border: 1px solid var(--border);
@@ -205,7 +205,7 @@
     }
     .route-map-preview b { color: var(--primary); }
 
-    /* 单日行程卡片 (对应图4) */
+    /* 单日行程卡片 */
     .day-card {
       background: var(--day-card-bg);
       border-radius: 12px;
@@ -268,29 +268,6 @@
     }
     .content { font-size: 0.92rem; }
     
-    /* 摄影子模块节点 */
-    .photo-spot {
-      margin-top: 8px;
-      padding-left: 10px;
-      border-left: 2px dashed var(--border);
-    }
-    .photo-spot-item {
-      margin-bottom: 10px;
-    }
-    .photo-spot-item:last-child {
-      margin-bottom: 0;
-    }
-    .spot-title {
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .spot-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
     .tag {
       display: inline-block;
       font-size: 0.75rem;
@@ -301,6 +278,11 @@
       margin-left: 4px;
     }
 
+    .tag-warning {
+      background: #f8d7da;
+      color: #842029;
+    }
+
     a.map-link {
       color: inherit;
       text-decoration: none;
@@ -308,7 +290,7 @@
     }
     a.map-link:hover { color: var(--primary); }
 
-    /* 底部备忘录样式 (对应图6) */
+    /* 底部备忘录样式 */
     .memo-input-box {
       display: flex;
       gap: 8px;
@@ -367,11 +349,11 @@
 </head>
 <body>
 
-<!-- 密码访问验证层 (对应图5) -->
+<!-- 密码访问验证层 -->
 <div id="lock-screen">
   <div class="lock-card">
-    <h2>🔒 仅限同行者</h2>
-    <p style="font-size: 0.85rem; color: var(--text-muted);">这个行程仅向同行者开放。请输入共享密码继续（初始密码: 2026）。</p>
+    <h2>🔒 意大利南部之旅</h2>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">请输入共享密码继续（初始密码: 2026）。</p>
     <div class="lock-input-group">
       <input type="password" id="access-password" placeholder="输入访问密码...">
       <button onclick="verifyPassword()">确认</button>
@@ -385,157 +367,233 @@
 
 <div class="container" id="main-content" style="display:none;">
 
-  <!-- 1. 顶部机票/火车票信息卡片 (对应图2) -->
+  <!-- 1. 顶部往返交通信息卡片 -->
   <div class="card hero-card">
     <div class="label">INTERNATIONAL TRANSPORT</div>
-    <div class="event">🚄 欧洲之星往返行程信息</div>
+    <div class="event">✈️ Breda ➔ 布鲁塞尔 ➔ 罗马 / 索伦托 ➔ 那不勒斯 ➔ 阿姆 ➔ Breda</div>
     <div class="ticket-grid">
       <div>
-        <div class="ticket-city">BRU / RTM</div>
-        <div class="ticket-sub">鹿特丹发车</div>
+        <div class="ticket-city">BREDA</div>
+        <div class="ticket-sub">出发地</div>
       </div>
       <div class="ticket-arrow">➔</div>
       <div>
-        <div class="ticket-city">LON</div>
-        <div class="ticket-sub">伦敦圣潘克拉斯</div>
+        <div class="ticket-city">ROM / NAP</div>
+        <div class="ticket-sub">罗马 / 意南</div>
       </div>
     </div>
     <div class="ticket-info-row">
-      <span>去程: 09月10日 15:28 发车</span>
-      <span>已出票</span>
+      <span>去程: 12月24日 17:42 发车</span>
+      <span>回程: 1月3日 阿姆归程</span>
     </div>
   </div>
 
-  <!-- 2. 逐日行程左右滑动滑块区 (对应图1、图3、图4) -->
+  <!-- 2. 逐日行程左右滑动滑块区 (共10天) -->
   <div class="card">
     <div class="slider-nav">
       <button id="prev-btn" onclick="slideDay(-1)" disabled>◀ 前一天</button>
-      <div class="slider-indicators" id="slide-indicator">Day 1 / 4</div>
+      <div class="slider-indicators" id="slide-indicator">Day 1 / 10</div>
       <button id="next-btn" onclick="slideDay(1)">后一天 ▶</button>
     </div>
 
     <div class="slider-container">
       <div class="slider-track" id="slider-track">
 
-        <!-- Day 1 滑块 -->
+        <!-- Day 1: Dec 24 -->
         <div class="day-slide">
-          <!-- 当天路线图预览 (对应图3) -->
           <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 鹿特丹 ➔ 伦敦 ➔ Outernet ➔ Soho ➔ 威斯敏斯特桥 ➔ 伦敦眼
+            🗺️ <b>当日路线概览:</b> Breda ➔ 布鲁塞尔(BRU) ➔ 罗马(FCO) ➔ 民宿
           </div>
           <div class="day-card">
             <div class="day-header">
-              <h3>Day 1: 9月10日 (周四) · 伦敦</h3>
-              <div class="weather-badge">⛅ 伦敦: 多云 | 16°C - 19°C | 降水 0.0mm (0%)</div>
+              <h3>Day 1: 12月24日 (周四) · 罗马</h3>
+              <div class="weather-badge">🌤️ 罗马: 多云 | 8°C - 14°C</div>
             </div>
             <div class="timeline">
-              <div class="timeline-item"><div class="time">13:30</div><div class="content">🚶 从家出发准备去车站</div></div>
-              <div class="timeline-item"><div class="time">13:44 - 14:07</div><div class="content">🚆 火车: Breda ➔ Rotterdam Centraal</div></div>
-              <div class="timeline-item"><div class="time">14:15 - 15:15</div><div class="content">🛂 鹿特丹 Centraal 办理 Eurostar 安检 & 过海关</div></div>
-              <div class="timeline-item">
-                <div class="time">15:28 - 17:57</div>
-                <div class="content">🚆 <b>Eurostar 往程列车</b> (<a class="map-link" href="https://www.google.com/maps/search/?api=1&query=London+St+Pancras+International" target="_blank">📍 伦敦 St Pancras</a>) <span class="tag">已出票</span></div>
-              </div>
-              <div class="timeline-item"><div class="time">18:30</div><div class="content">办理解理入住民宿</div></div>
-              <div class="timeline-item">
-                <div class="time">19:00 - 22:00</div>
-                <div class="content">
-                  📸 <b>伦敦夜景摄影与夜游路线</b>
-                  <div class="photo-spot">
-                    <div class="photo-spot-item">
-                      <div class="spot-title">📍 第一站: <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Outernet+London" target="_blank">Outernet London</a> <span class="tag">免费无需预约</span></div>
-                      <div class="spot-desc">• 欧最大 16K LED 沉浸式数字艺术空间，适合手持超广角 (16-35mm) 捕捉张力。</div>
-                    </div>
-                    <div class="photo-spot-item">
-                      <div class="spot-title">📍 第二站: Soho & Piccadilly Circus 街景扫街</div>
-                      <div class="spot-desc">• 感受繁华街头与巨大曲面霓虹屏，适合人文街拍。</div>
-                    </div>
-                    <div class="photo-spot-item">
-                      <div class="spot-title">📍 第三站: <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Westminster+Bridge" target="_blank">威斯敏斯特桥</a></div>
-                      <div class="spot-desc">• 经典大本钟夜景，架三脚架慢门（2s-5s，f/8，ISO 100）拍车轨。</div>
-                    </div>
-                    <div class="photo-spot-item">
-                      <div class="spot-title">📍 第四站: <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=The+London+Eye" target="_blank">伦敦眼 & 黄金禧桥</a></div>
-                      <div class="spot-desc">• 俯瞰完整天际线。</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <div class="timeline-item"><div class="time">出行准备</div><div class="content">出门去 Breda 火车站</div></div>
+              <div class="timeline-item"><div class="time">17:42 - 18:49</div><div class="content">🚆 火车: Breda ➔ 布鲁塞尔 BRU <span class="tag">提前买票 €17.3</span></div></div>
+              <div class="timeline-item"><div class="time">20:55 - 23:00</div><div class="content">✈️ 航班: 布鲁塞尔 BRU ➔ 罗马 FCO</div></div>
+              <div class="timeline-item"><div class="time">深夜</div><div class="content">罗马 FCO 机场 ➔ 民宿入住</div></div>
             </div>
           </div>
         </div>
 
-        <!-- Day 2 滑块 -->
+        <!-- Day 2: Dec 25 -->
         <div class="day-slide">
           <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 大英博物馆 ➔ 圣保罗大教堂倒影 ➔ Horizon 22 ➔ 泰晤士河缆车夜航
+            🗺️ <b>当日路线概览:</b> 特莱维喷泉 ➔ 西班牙广场 ➔ 万神殿周边 ➔ 真理之口 ➔ 贾尼科洛山
           </div>
           <div class="day-card">
             <div class="day-header">
-              <h3>Day 2: 9月11日 (周五) · 伦敦</h3>
-              <div class="weather-badge">🌤️ 伦敦: 多云间晴 | 12°C - 21°C | 微风</div>
+              <h3>Day 2: 12月25日 (周四/圣诞节) · 罗马</h3>
+              <div class="weather-badge">☀️ 罗马: 晴间多云 | 7°C - 13°C</div>
             </div>
             <div class="timeline">
-              <div class="timeline-item">
-                <div class="time">10:00 - 15:30</div>
-                <div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=British+Museum" target="_blank">📍 大英博物馆</a> <span class="tag">已预约 11:10</span></div>
-              </div>
-              <div class="timeline-item">
-                <div class="time">16:00 - 16:30</div>
-                <div class="content">📸 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Reflection+Garden+St+Paul's+Cathedral" target="_blank">📍 圣保罗大教堂水池倒影</a></div>
-              </div>
-              <div class="timeline-item">
-                <div class="time">16:45 - 17:40</div>
-                <div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Horizon+22+London" target="_blank">📍 Horizon 22 观景台</a> <span class="tag">已预约 16:45</span></div>
-              </div>
-              <div class="timeline-item">
-                <div class="time">19:30 - 21:00</div>
-                <div class="content">🚡 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=IFS+Cloud+Cable+Car+Greenwich+Peninsula" target="_blank">📍 IFS Cloud Cable Car 夜航</a> <span class="tag">刷 Contactless</span></div>
-              </div>
+              <div class="timeline-item"><div class="time">清晨</div><div class="content">民宿出发，早上人少出片</div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Trevi+Fountain" target="_blank">📍 特莱维喷泉 (Trevi Fountain)</a></div></div>
+              <div class="timeline-item"><div class="time">步行 10 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Spanish+Steps" target="_blank">📍 西班牙广场 (Spanish Steps)</a></div></div>
+              <div class="timeline-item"><div class="time">步行 20 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Temple+of+Aesculapius" target="_blank">📍 Temple of Aesculapius</a> (电车150F Victor Hugo - Farini)</div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Papal+Basilica+of+Saint+Mary+Major" target="_blank">📍 圣母大殿 (Papal Basilica of Saint Mary Major)</a> (公交70 Ara Coeli - S. Maria Maggiore)</div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Portico+of+the+Harmonious+Gods" target="_blank">📍 Portico of the Harmonious Gods</a></div></div>
+              <div class="timeline-item"><div class="time">步行 7 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Bocca+della+Verita" target="_blank">📍 真理之口 (Mouth of Truth)</a> (在外面看)</div></div>
+              <div class="timeline-item"><div class="time">步行 20 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Keyhole+of+the+Order+of+Malta" target="_blank">📍 马耳他骑士团钥匙孔 (Keyhole of the Order of Malta)</a> (公交车75/115)</div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Passeggiata+del+Gianicolo" target="_blank">📍 贾尼科洛山观景台 (Passeggiata del Gianicolo)</a> & 丰塔纳湖 (Fontana dell'Acqua Paola)</div></div>
+              <div class="timeline-item"><div class="time">夜晚</div><div class="content">回民宿休息</div></div>
             </div>
           </div>
         </div>
 
-        <!-- Day 3 滑块 -->
+        <!-- Day 3: Dec 26 -->
         <div class="day-slide">
           <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 伦敦 ➔ 布赖顿 ➔ Seaford ➔ Seven Sisters 白崖徒步 ➔ Beachy Head
+            🗺️ <b>当日路线概览:</b> 万神殿 ➔ 圣依纳爵堂 ➔ 罗马斗兽场 ➔ 古罗马广场 ➔ 维托里安诺
           </div>
           <div class="day-card">
             <div class="day-header">
-              <h3>Day 3: 9月12日 (周六) · 白崖 (Seaford)</h3>
-              <div class="weather-badge">☀️ 白崖: 晴 | 12°C - 21°C | 阵风 26mph</div>
+              <h3>Day 3: 12月26日 (周六) · 罗马</h3>
+              <div class="weather-badge">🌤️ 罗马: 晴间多云 | 6°C - 13°C</div>
             </div>
             <div class="timeline">
-              <div class="timeline-item"><div class="time">08:35 - 09:43</div><div class="content">🚆 火车: London Bridge ➔ Brighton</div></div>
-              <div class="timeline-item"><div class="time">10:06 - 10:48</div><div class="content">🚆 火车: Brighton ➔ <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Seaford+railway+station" target="_blank">Seaford</a> <span class="tag">已出票</span></div></div>
-              <div class="timeline-item"><div class="time">10:59 - 11:08</div><div class="content">🚌 12X 公交: Seaford ➔ Seven Sisters Park Centre</div></div>
-              <div class="timeline-item">
-                <div class="time">11:10 - 17:00</div>
-                <div class="content">📸 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Seven+Sisters+Cliffs" target="_blank">Seven Sisters 白崖</a> 徒步摄影 (约 5.5 - 6 小时)</div>
-              </div>
-              <div class="timeline-item"><div class="time">17:12 - 18:28</div><div class="content">🚌 13X 公交: Beachy Head Centre ➔ Brighton Train Station</div></div>
-              <div class="timeline-item"><div class="time">18:44 - 19:45</div><div class="content">🚆 Thameslink 返程火车 (Brighton ➔ London Bridge) <span class="tag">已出票</span></div></div>
+              <div class="timeline-item"><div class="time">出发</div><div class="content">民宿出发</div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Pantheon+Rome" target="_blank">📍 万神殿 (Pantheon)</a> <span class="tag">11月1号 预约/买票 €7</span></div></div>
+              <div class="timeline-item"><div class="time">步行 3 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Chiesa+di+Sant'Ignazio+di+Loyola" target="_blank">📍 圣依纳爵堂 (Chiesa di Sant'Ignazio di Loyola)</a> <span class="tag">免预约/门票</span> (公交51/85)</div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Colosseum" target="_blank">📍 罗马斗兽场 (Colosseum)</a> <span class="tag tag-warning">11月26号 预约/买票 €18</span></div></div>
+              <div class="timeline-item"><div class="time">步行 5 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Roman+Forum" target="_blank">📍 古罗马广场 (Roman Forum)</a> <span class="tag">Colosseum通票</span></div></div>
+              <div class="timeline-item"><div class="time">步行 5 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Monumento+a+Vittorio+Emanuele+II" target="_blank">📍 维托里安诺 / 埃马努埃莱二世纪念碑</a> <span class="tag tag-warning">9月27号 预约/买票 €18</span></div></div>
+              <div class="timeline-item"><div class="time">夜晚</div><div class="content">回民宿</div></div>
             </div>
           </div>
         </div>
 
-        <!-- Day 4 滑块 -->
+        <!-- Day 4: Dec 27 -->
         <div class="day-slide">
           <div class="route-map-preview">
-            🗺️ <b>当日路线概览:</b> 寄存行李 ➔ Drapers' Hall ➔ Maughan Library ➔ 提取行李 ➔ 鹿特丹
+            🗺️ <b>当日路线概览:</b> 梵蒂冈博物馆 ➔ 西斯廷礼拜堂 ➔ 圣彼得大教堂 ➔ 圣天使堡 ➔ 翁贝托一世桥
           </div>
           <div class="day-card">
             <div class="day-header">
-              <h3>Day 4: 9月13日 (周日) · 伦敦返程</h3>
-              <div class="weather-badge">🌤️ 伦敦: 多云间晴 | 14°C - 21°C</div>
+              <h3>Day 4: 12月27日 (周日) · 罗马/梵蒂冈</h3>
+              <div class="weather-badge">⛅ 罗马: 多云 | 7°C - 12°C</div>
             </div>
             <div class="timeline">
-              <div class="timeline-item"><div class="time">08:30</div><div class="content">🧳 Kings Cross Computer Centre 寄存行李 <span class="tag">已预约</span></div></div>
-              <div class="timeline-item"><div class="time">09:30 - 11:30</div><div class="content">🏛️ <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Drapers'+Hall+London" target="_blank">Drapers' Hall</a> 宫殿级维多利亚内景</div></div>
-              <div class="timeline-item"><div class="time">13:30 - 15:30</div><div class="content">📚 <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Maughan+Library+KCL" target="_blank">Maughan Library</a> 八角形大图书馆</div></div>
-              <div class="timeline-item"><div class="time">16:30</div><div class="content">🧳 提取行李并前往 St Pancras 车站</div></div>
-              <div class="timeline-item"><div class="time">18:04 - 22:32</div><div class="content">🚆 Eurostar 返程列车 (伦敦 ➔ 鹿特丹) <span class="tag">已出票</span></div></div>
+              <div class="timeline-item"><div class="time">出发</div><div class="content">民宿出发</div></div>
+              <div class="timeline-item"><div class="time">09:00 到场</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Vatican+Museums" target="_blank">📍 梵蒂冈博物馆 & 西斯廷礼拜堂</a> <span class="tag tag-warning">已预约 9:00 到现场</span></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Saint+Peter's+Basilica" target="_blank">📍 圣彼得大教堂 (Saint Peter's Basilica)</a></div></div>
+              <div class="timeline-item"><div class="time">步行 11 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Monument+di+Santa+Caterina+da+Siena" target="_blank">📍 Monument di Santa Caterina da Siena</a></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Castel+Sant'Angelo" target="_blank">📍 圣天使堡 (Castel Sant'Angelo)</a></div></div>
+              <div class="timeline-item"><div class="time">步行 6 分钟</div><div class="content"></div></div>
+              <div class="timeline-item"><div class="time">景点</div><div class="content"><a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Ponte+Umberto+I" target="_blank">📍 翁贝托一世桥 (Ponte Umberto I)</a> 摄影点</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 5: Dec 28 -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 罗马 ➔ 高铁 ➔ 那不勒斯 (Napoli)
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 5: 12月28日 (周一) · 罗马 ➔ 那不勒斯</h3>
+              <div class="weather-badge">🌤️ 那不勒斯: 多云 | 9°C - 14°C</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">上午</div><div class="content">民宿出发去罗马 Termini 火车站</div></div>
+              <div class="timeline-item">
+                <div class="time">11:24 - 12:33</div>
+                <div class="content">🚆 <b>高铁: 罗马 Termini ➔ 那不勒斯 Centrale</b> <span class="tag">已出票 €45,80 (Frecciarossa 9611)</span></div>
+              </div>
+              <div class="timeline-item"><div class="time">下午</div><div class="content">那不勒斯民宿入住与休整</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 6: Dec 29 (留空待补充) -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 那不勒斯 (行程待补充)
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 6: 12月29日 (周二) · 那不勒斯</h3>
+              <div class="weather-badge">⛅ 那不勒斯: 天气待定</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">全天</div><div class="content">行程规划中，待您补充...</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 7: Dec 30 (留空待补充) -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 那不勒斯 ➔ 索伦托
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 7: 12月30日 (周三) · 那不勒斯 ➔ 索伦托</h3>
+              <div class="weather-badge">🌤️ 索伦托: 天气待定</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">11:00</div><div class="content">租车取车 (自驾 1.5h 那不勒斯 ➔ 索伦托)</div></div>
+              <div class="timeline-item"><div class="time">下午</div><div class="content">入住索伦托民宿</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 8: Dec 31 (留空待补充) -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 索伦托 (跨年夜)
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 8: 12月31日 (周四/跨年夜) · 索伦托</h3>
+              <div class="weather-badge">🎆 索伦托: 跨年夜天气待定</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">全天</div><div class="content">索伦托跨年行程规划中，待您补充...</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 9: Jan 01 (留空待补充) -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 索伦托 (新年)
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 9: 1月1日 (周五/元旦) · 索伦托</h3>
+              <div class="weather-badge">☀️ 索伦托: 新年天气待定</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">全天</div><div class="content">新年行程规划中，待您补充...</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 10: Jan 02-03 -->
+        <div class="day-slide">
+          <div class="route-map-preview">
+            🗺️ <b>当日路线概览:</b> 索伦托 ➔ 那不勒斯NAP ➔ 阿姆AMS ➔ Breda
+          </div>
+          <div class="day-card">
+            <div class="day-header">
+              <h3>Day 10: 1月2日 - 3日 (周六-周日) · 返程</h3>
+              <div class="weather-badge">✈️ 返程天气</div>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item"><div class="time">1月2日</div><div class="content">索伦托 ➔ 那不勒斯 (准备返程)</div></div>
+              <div class="timeline-item"><div class="time">1月3日</div><div class="content">那不勒斯 NAP ➔ 阿姆 AMS ➔ Breda</div></div>
             </div>
           </div>
         </div>
@@ -544,9 +602,9 @@
     </div>
   </div>
 
-  <!-- 3. 底部可勾选备忘录 (对应图6) -->
+  <!-- 3. 底部可勾选备忘录 -->
   <div class="card">
-    <div class="card-title">📝 旅行前准备 & 备忘录</div>
+    <div class="card-title">📝 意南跨年准备 & 备忘录</div>
     <div class="memo-input-box">
       <input type="text" id="new-memo-input" placeholder="添加一项准备事项...">
       <button onclick="addMemoItem()">添加</button>
@@ -567,18 +625,17 @@
       document.getElementById("lock-screen").style.display = "none";
       document.getElementById("main-content").style.display = "block";
       if (remember) {
-        localStorage.setItem("trip_auth", "true");
-        localStorage.setItem("trip_auth_time", Date.now());
+        localStorage.setItem("italy_trip_auth", "true");
+        localStorage.setItem("italy_trip_auth_time", Date.now());
       }
     } else {
       alert("密码错误，请重新输入（默认密码为 2026）");
     }
   }
 
-  // 检查 14 天内是否授权过
   window.onload = function() {
-    const auth = localStorage.getItem("trip_auth");
-    const authTime = localStorage.getItem("trip_auth_time");
+    const auth = localStorage.getItem("italy_trip_auth");
+    const authTime = localStorage.getItem("italy_trip_auth_time");
     const fourteenDays = 14 * 24 * 60 * 60 * 1000;
     if (auth === "true" && authTime && (Date.now() - authTime < fourteenDays)) {
       document.getElementById("lock-screen").style.display = "none";
@@ -586,9 +643,9 @@
     }
   };
 
-  // 左右滑块逻辑
+  // 左右滑块逻辑 (共10天)
   let currentSlide = 0;
-  const totalSlides = 4;
+  const totalSlides = 10;
 
   function slideDay(direction) {
     currentSlide += direction;
@@ -603,12 +660,12 @@
     document.getElementById("next-btn").disabled = currentSlide === totalSlides - 1;
   }
 
-  // 底部备忘录本地存储交互逻辑 (对应图6)
-  let memoItems = JSON.parse(localStorage.getItem("trip_memos")) || [
-    { text: "准备相机电池、存储卡及三脚架", completed: false },
-    { text: "确认伦敦公共交通及缆车支持 Contactless 刷卡", completed: true },
-    { text: "准备周六白崖徒步轻便防风衣与防晒霜", completed: false },
-    { text: "提前预约好行李寄存点 (Kings Cross)", completed: true }
+  // 底部备忘录本地存储交互逻辑
+  let memoItems = JSON.parse(localStorage.getItem("italy_trip_memos")) || [
+    { text: "已买好 12月28日 罗马-那不勒斯高铁票 (Frecciarossa 9611)", completed: true },
+    { text: "确认 12月26日 斗兽场 (€18) 与 维托里安诺门票", completed: true },
+    { text: "确认 12月27日 梵蒂冈博物馆 9:00 预约", completed: true },
+    { text: "提前准备好 12月30日 租车及自驾索伦托相关证件", completed: false }
   ];
 
   function renderMemos() {
@@ -626,7 +683,7 @@
       `;
       listEl.appendChild(li);
     });
-    localStorage.setItem("trip_memos", JSON.stringify(memoItems));
+    localStorage.setItem("italy_trip_memos", JSON.stringify(memoItems));
   }
 
   function addMemoItem() {
@@ -649,7 +706,6 @@
     renderMemos();
   }
 
-  // 初始化加载备忘录
   renderMemos();
 </script>
 
