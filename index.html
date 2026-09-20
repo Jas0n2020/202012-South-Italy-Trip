@@ -1,148 +1,779 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f3f6f2">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>意大利南部跨年之旅</title>
-  <link rel="stylesheet" href="styles.css?v=20260910-3">
-  <link rel="stylesheet" href="ledger.css?v=20260910-2">
-  <script src="runtime-storage.js?v=20260910-2" defer></script>
-  <script src="overview-map.js?v=20260910-2" defer></script>
-  <script src="route-ui.js?v=20260910-2" defer></script>
-  <script src="app.js?v=20260910-4" defer></script>
-  <script src="ticket-pdf-preview.js?v=20260910-2" defer></script>
-  <script src="ledger.js?v=20260910-3" defer></script>
-  <script src="site-navigation.js?v=20260910-2" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRIVATE JOURNEY | 意大利南部跨年之旅</title>
+    <!-- Google Fonts: 引入思源黑体与现代无衬线 Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --bg-card-subtle: #F1F5F9;
+            --text-primary: #0F172A;
+            --text-secondary: #475569;
+            --text-muted: #94A3B8;
+            --accent-orange: #F97316;
+            --accent-orange-bg: #FFF7ED;
+            --accent-blue: #2563EB;
+            --accent-blue-bg: #EFF6FF;
+            --accent-green: #10B981;
+            --border-color: #E2E8F0;
+            --radius-lg: 20px;
+            --radius-md: 12px;
+            --font-main: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: var(--font-main);
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding-bottom: 60px;
+        }
+
+        /* 密码锁屏 Overlay */
+        #auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--bg-main);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+        }
+
+        .auth-card {
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 32px 24px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .auth-header {
+            background: #0F172A;
+            color: #FFFFFF;
+            margin: -32px -24px 24px -24px;
+            padding: 20px 24px;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .auth-header .tag {
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #94A3B8;
+        }
+
+        .auth-input-group {
+            position: relative;
+            margin-top: 16px;
+        }
+
+        .auth-input {
+            width: 100%;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1.5px solid var(--border-color);
+            font-size: 18px;
+            letter-spacing: 4px;
+            outline: none;
+            transition: all 0.2s;
+            background: #F8FAFC;
+        }
+
+        .auth-input:focus {
+            border-color: var(--accent-blue);
+            background: #FFFFFF;
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 20px;
+            background: #0F172A;
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:active {
+            background: #1E293B;
+        }
+
+        /* 顶部 Main Header */
+        .app-header {
+            padding: 24px 20px 12px;
+            background: #FFFFFF;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sub-header-tag {
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .main-title {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .date-range {
+            font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* 机票卡片样式 */
+        .flight-card {
+            background: #0F172A;
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 12px 24px -6px rgba(15, 23, 42, 0.15);
+        }
+
+        .flight-card-top {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #94A3B8;
+            font-weight: 600;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed #334155;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+        }
+
+        .flight-route {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .airport-code {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .airport-name {
+            font-size: 12px;
+            color: #94A3B8;
+            margin-top: 2px;
+        }
+
+        .flight-arrow {
+            color: var(--accent-orange);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .flight-arrow svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        .flight-details {
+            background: #1E293B;
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        /* 横向滚动日期栏 */
+        .section-title {
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin: 24px 0 12px;
+        }
+
+        .date-slider {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .date-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .date-tab {
+            flex: 0 0 auto;
+            width: 120px;
+            background: #FFFFFF;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 10px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .date-tab.active {
+            background: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+        }
+
+        .date-tab .tab-date {
+            font-size: 14px;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .date-tab .tab-city {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 4px;
+            opacity: 0.8;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* 每日详细行程节点 */
+        .timeline-card {
+            background: #FFFFFF;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+        }
+
+        .map-box {
+            background: #F8FAFC;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin-bottom: 20px;
+        }
+
+        .map-title {
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .node-list {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .node-list::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: #E2E8F0;
+        }
+
+        .node-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .node-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .node-dot {
+            position: absolute;
+            left: -20px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #FFFFFF;
+            border: 3px solid var(--accent-blue);
+        }
+
+        .node-item.transport .node-dot {
+            border-color: var(--text-muted);
+            width: 10px;
+            height: 10px;
+            left: -18px;
+        }
+
+        .node-content {
+            background: #F8FAFC;
+            padding: 12px 14px;
+            border-radius: var(--radius-md);
+            border: 1px solid #F1F5F9;
+        }
+
+        .node-title-zh {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .node-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        .node-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .tag-ticket-need {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .tag-ticket-done {
+            background: #D1FAE5;
+            color: #059669;
+        }
+
+        .tag-free {
+            background: #DBEAFE;
+            color: #1D4ED8;
+        }
+
+        .node-transport-text {
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 4px 0;
+            font-style: italic;
+        }
+
+        /* 备忘录清单 */
+        .todo-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #F8FAFC;
+            border-radius: var(--radius-md);
+            margin-bottom: 8px;
+        }
+
+        .todo-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent-orange);
+        }
+    </style>
 </head>
 <body>
-  <a class="skip-link" id="skip-link" href="#main">跳到主要内容</a>
-  <header class="topbar" id="topbar">
-    <a class="wordmark" id="wordmark" href="#top" aria-label="返回顶部"></a>
-    <nav class="primary-navigation" aria-label="主要模块">
-      <details class="travel-navigation" id="travel-navigation" hidden>
-        <summary id="travel-navigation-trigger">旅行信息</summary>
-        <div class="travel-navigation-menu" role="menu" aria-label="旅行信息栏目">
-          <a href="#flights" role="menuitem" data-module="flights" hidden>航班</a>
-          <a href="#route" role="menuitem" data-module="overview" hidden>路线</a>
-          <a href="#itinerary" role="menuitem" data-module="itinerary" hidden>行程</a>
-          <a href="#drive" role="menuitem" data-module="driving" hidden>自驾</a>
-          <a href="#prep" role="menuitem" data-module="todo" hidden>Todo</a>
+
+    <!-- 密码验证层 -->
+    <div id="auth-overlay">
+        <div class="auth-card">
+            <div class="auth-header">
+                <div>
+                    <div class="tag">PRIVATE JOURNEY</div>
+                    <div style="font-size: 18px; font-weight: 800; margin-top: 2px;">受保护的行程单</div>
+                </div>
+                <div style="font-size: 20px;">🔒</div>
+            </div>
+            <p style="font-size: 13px; color: var(--text-secondary);">请输入访问密码查看详细行程安排</p>
+            <div class="auth-input-group">
+                <input type="password" id="pass-input" class="auth-input" placeholder="输入密码">
+            </div>
+            <button class="btn-submit" onclick="checkAuth()">解锁查看行程</button>
+            <p id="auth-err" style="color: #DC2626; font-size: 12px; margin-top: 10px; display: none;">密码错误，请重新输入</p>
         </div>
-      </details>
-      <a class="primary-navigation__ledger" id="ledger-navigation-link" href="#ledger" data-module="ledger" hidden>记账</a>
-    </nav>
-  </header>
+    </div>
 
-  <main id="main" data-site-view="travel">
-    <section class="hero" id="top" aria-labelledby="trip-title">
-      <div class="hero__eyebrow" id="trip-eyebrow"></div>
-      <h1 id="trip-title">正在载入旅程</h1>
-      <p class="hero__date" id="trip-date"></p>
-    </section>
-
-    <section class="section flights-section" id="flights" aria-labelledby="flights-title" data-module="flights" hidden>
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">BOARDING</p>
-          <h2 id="flights-title">航班行程</h2>
+    <!-- 主界面头部 -->
+    <div class="app-header">
+        <div class="container">
+            <div class="sub-header-tag">SWITZERLAND — ITALY</div>
+            <div class="main-title">意大利南部跨年之旅</div>
+            <div class="date-range">2026年12月24日 — 2027年1月3日 · 10天</div>
         </div>
-        <p class="section-index" id="flight-index" aria-live="polite">1 / 3</p>
-      </div>
-      <div class="flight-carousel" id="flight-carousel" aria-label="航班卡片，可左右滑动"></div>
-      <div class="carousel-dots" id="flight-dots" aria-hidden="true"></div>
-    </section>
+    </div>
 
-    <section class="section route-section" id="route" aria-labelledby="route-title" data-module="overview" hidden>
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">THE WHOLE JOURNEY</p>
-          <h2 id="route-title">本次旅程</h2>
+    <div class="container">
+
+        <!-- 真实机票卡片 -->
+        <div class="flight-card">
+            <div class="flight-card-top">
+                <span>FLIGHT · EASYJET</span>
+                <span>EJU2988</span>
+            </div>
+            <div class="flight-route">
+                <div>
+                    <div class="airport-code">BRU</div>
+                    <div class="airport-name">Brussels Intl</div>
+                    <div style="font-size: 12px; margin-top: 4px; font-weight: 700; color: #F8FAFC;">24 Dec · 20:55</div>
+                </div>
+                <div class="flight-arrow">
+                    <svg viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></svg>
+                    <span style="font-size: 10px; color: #94A3B8; margin-top: 2px;">2h 05m</span>
+                </div>
+                <div style="text-align: right;">
+                    <div class="airport-code">FCO</div>
+                    <div class="airport-name">Rome Fiumicino</div>
+                    <div style="font-size: 12px; margin-top: 4px; font-weight: 700; color: #F8FAFC;">24 Dec · 23:00</div>
+                </div>
+            </div>
+            <div class="flight-details">
+                <span>预订代码: <strong style="color: var(--accent-orange);">KDDKF95</strong></span>
+                <span>航站楼: <strong>T1</strong></span>
+            </div>
         </div>
-        <span class="soft-label" id="route-day-count"></span>
-      </div>
-      <div id="route-explorer"></div>
-      <p class="route-caption">路线为行程示意，实际驾驶和步行请使用当天的 Google Maps 导航。</p>
-    </section>
 
-    <section class="section itinerary-section" id="itinerary" aria-labelledby="itinerary-title" data-module="itinerary" hidden>
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">DAY BY DAY</p>
-          <h2 id="itinerary-title">每日行程</h2>
+        <!-- 横向滚动日期栏 (10天) -->
+        <div class="section-title">ITINERARY / 10天行程选择</div>
+        <div class="date-slider" id="date-slider">
+            <!-- 动态生成日期 Tab -->
         </div>
-        <span class="soft-label" id="day-count"></span>
-      </div>
-      <div class="timeline" id="timeline"></div>
-    </section>
 
-    <section class="section drive-section" id="drive" aria-labelledby="drive-title" data-module="driving" hidden>
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">ON THE ROAD</p>
-          <h2 id="drive-title">自驾信息</h2>
+        <!-- 详细行程区 -->
+        <div class="timeline-card" id="timeline-container">
+            <!-- 动态渲染对应日期的详细节点与 SVG 地图 -->
         </div>
-        <span class="soft-label" id="rental-provider-label">RENTAL</span>
-      </div>
-      <div id="rental-card"></div>
-      <div class="accordion-stack" id="drive-notes"></div>
-    </section>
 
-    <section class="section prep-section" id="prep" aria-labelledby="prep-title" data-module="todo" hidden>
-      <div class="section-heading">
-        <div>
-          <p class="section-kicker">BEFORE WE GO</p>
-          <h2 id="prep-title">旅行前准备</h2>
+        <!-- 检查清单 -->
+        <div class="section-title">CHECKLIST / 准备清单</div>
+        <div class="timeline-card">
+            <div class="todo-item"><input type="checkbox" checked> <span>护照与申根签证确认</span></div>
+            <div class="todo-item"><input type="checkbox" checked> <span>往返机票与火车票凭证备份</span></div>
+            <div class="todo-item"><input type="checkbox"> <span>万神殿门票（11月1日预订 · €7）</span></div>
+            <div class="todo-item"><input type="checkbox"> <span>斗兽场门票（11月26日预订 · €18）</span></div>
+            <div class="todo-item"><input type="checkbox"> <span>祖国祭坛门票（9月27日预订 · €18）</span></div>
         </div>
-        <span class="soft-label" id="todo-progress">0 / 0</span>
-      </div>
-      <form class="todo-form" id="todo-form">
-        <input id="todo-input" type="text" maxlength="80" placeholder="添加一项准备事项" aria-label="准备事项">
-        <button type="submit">添加</button>
-      </form>
-      <div class="todo-list" id="todo-list"></div>
-    </section>
 
-    <footer class="footer">
-      <p id="footer-mark"></p>
-      <a href="#top">回到顶部 ↑</a>
-    </footer>
-  </main>
+    </div>
 
-  <main class="ledger-view" id="ledger-view" data-site-view="ledger" data-module="ledger" hidden>
-    <div id="ledger-root"></div>
-  </main>
+    <script>
+        const CORRECT_PASS = "8848E";
 
-  <dialog class="map-dialog" id="map-dialog">
-    <button type="button" class="dialog-close" id="map-close" aria-label="关闭路线图">关闭</button>
-    <div id="map-dialog-content"></div>
-  </dialog>
+        function checkAuth() {
+            const input = document.getElementById('pass-input').value;
+            if (input === CORRECT_PASS) {
+                document.getElementById('auth-overlay').style.display = 'none';
+                localStorage.setItem('auth_ok', '1');
+            } else {
+                document.getElementById('auth-err').style.display = 'block';
+            }
+        }
 
-  <dialog class="ticket-dialog" id="ticket-dialog" aria-labelledby="ticket-dialog-title">
-    <header>
-      <div>
-        <span>门票与预订</span>
-        <h2 id="ticket-dialog-title">门票详情</h2>
-      </div>
-      <button type="button" id="ticket-dialog-close" aria-label="关闭门票详情">关闭</button>
-    </header>
-    <div class="ticket-dialog__body" id="ticket-dialog-body"></div>
-  </dialog>
+        if (localStorage.getItem('auth_ok') === '1') {
+            document.getElementById('auth-overlay').style.display = 'none';
+        }
 
-  <div class="place-map-overlay" id="place-map" hidden>
-    <section class="place-map-sheet" role="dialog" aria-modal="true" aria-labelledby="place-map-title">
-      <header><h2 id="place-map-title">地点地图</h2><button id="place-map-close" type="button" aria-label="关闭地点地图">关闭</button></header>
-      <iframe id="place-map-frame" title="地点地图" src="about:blank" sandbox="allow-scripts allow-same-origin allow-forms" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
-      <footer><p>地图需要能够访问 Google 的网络。若一直空白，请在系统浏览器中打开。</p><a id="place-map-external" target="_blank" rel="noopener noreferrer">用 Google Maps 打开 ↗</a></footer>
-    </section>
-  </div>
+        // 完整 10 天日程与打卡数据
+        const daysData = [
+            {
+                date: "Dec-24 Thu",
+                city: "布雷达 ➔ 罗马",
+                svgMap: `
+                    <svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 50 70 Q 200 30 350 70" fill="none" stroke="#2563EB" stroke-width="3" stroke-dasharray="4,4"/>
+                        <circle cx="50" cy="70" r="6" fill="#2563EB"/><text x="35" y="95" font-size="11" font-weight="700">布雷达/布鲁塞尔</text>
+                        <circle cx="350" cy="70" r="6" fill="#F97316"/><text x="320" y="95" font-size="11" font-weight="700">罗马 FCO</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '出门去 Breda 火车站' },
+                    { type: 'transport', text: '🚆 火车 Breda - 布鲁塞尔 BRU (17:42 - 18:49 / 18:42 - 19:49，提前买票 €17.3)' },
+                    { type: 'transport', text: '✈️ 飞机 布鲁塞尔 BRU - 罗马 FCO (20:55 - 23:00，EJU2988)' },
+                    { type: 'end', title: '罗马 FCO 机场前往民宿入住' }
+                ]
+            },
+            {
+                date: "Dec-25 Fri",
+                city: "罗马",
+                svgMap: `
+                    <svg viewBox="0 0 400 160" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 50 20 C 100 50, 200 80, 350 140" fill="none" stroke="#93C5FD" stroke-width="12"/>
+                        <polyline points="280,30 220,25 180,45 150,70 130,100 110,130" fill="none" stroke="#F97316" stroke-width="3" stroke-dasharray="4,4"/>
+                        <circle cx="280" cy="30" r="5" fill="#2563EB"/><text x="288" y="34" font-size="10" font-weight="700">特莱维喷泉</text>
+                        <circle cx="220" cy="25" r="5" fill="#2563EB"/><text x="220" y="18" font-size="10" font-weight="700">西班牙阶梯</text>
+                        <circle cx="150" cy="70" r="5" fill="#2563EB"/><text x="158" y="75" font-size="10" font-weight="700">圣母大殿</text>
+                        <circle cx="130" cy="100" r="5" fill="#2563EB"/><text x="138" y="105" font-size="10" font-weight="700">真理之口</text>
+                        <circle cx="110" cy="130" r="5" fill="#2563EB"/><text x="118" y="135" font-size="10" font-weight="700">贾尼科洛山</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '民宿出发' },
+                    { type: 'spot', title: 'Trevi Fountain (特莱维喷泉)', desc: '早起人少出片', tag: '免费打卡', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚶 走路 10 min' },
+                    { type: 'spot', title: 'Spanish Steps (西班牙阶梯)', tag: '免费打卡', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚶 走路 20 min' },
+                    { type: 'spot', title: 'Temple of Aesculapius (医神庙)', tag: '湖畔公园', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚃 电车 150F (Victor Hugo - Farini)' },
+                    { type: 'spot', title: 'Papal Basilica of Saint Mary Major (圣母大殿)', tag: '免费参观', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚌 公车 70 (Ara Coeli - S. Maria Maggiore)' },
+                    { type: 'spot', title: 'Widok na Forum Romanum / Portico of the Harmonious Gods', desc: '古罗马广场视角', tag: '免费观景', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚶 走路 7 min' },
+                    { type: 'spot', title: 'Mouth of Truth (真理之口)', desc: '在外面看', tag: '外观打卡', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚶 走路 20 min' },
+                    { type: 'spot', title: 'Keyhole of the Order of Malta (马耳他骑士团钥匙孔)', tag: '窥视圣彼得大教堂', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚌 公车 75 / 115' },
+                    { type: 'spot', title: 'Passeggiata del Gianicolo (贾尼科洛林荫大道)', tag: '全景日落', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚶 走路 5 min' },
+                    { type: 'spot', title: "Fontana dell'Acqua Paola (保禄喷泉)" },
+                    { type: 'end', title: '返回民宿' }
+                ]
+            },
+            {
+                date: "Dec-26 Sat",
+                city: "罗马",
+                svgMap: `
+                    <svg viewBox="0 0 400 160" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 120 40 L 160 40 L 240 80 L 220 120 L 180 110" fill="none" stroke="#2563EB" stroke-width="3" stroke-dasharray="4,4"/>
+                        <circle cx="120" cy="40" r="6" fill="#DC2626"/><text x="100" y="30" font-size="10" font-weight="700">万神殿 €7</text>
+                        <circle cx="160" cy="40" r="5" fill="#2563EB"/><text x="165" y="32" font-size="10" font-weight="700">圣依纳爵堂</text>
+                        <circle cx="240" cy="80" r="6" fill="#DC2626"/><text x="250" y="85" font-size="10" font-weight="700">斗兽场 €18</text>
+                        <circle cx="220" cy="120" r="5" fill="#2563EB"/><text x="230" y="125" font-size="10" font-weight="700">古罗马广场</text>
+                        <circle cx="180" cy="110" r="6" fill="#DC2626"/><text x="120" y="125" font-size="10" font-weight="700">祖国祭坛 €18</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '民宿出发' },
+                    { type: 'spot', title: 'Pantheon (万神殿)', desc: '11月1日 预约/买票 €7', tag: '需购票', tagClass: 'tag-ticket-need' },
+                    { type: 'transport', text: '🚶 走路 3 min' },
+                    { type: 'spot', title: "Chiesa di Sant'Ignazio di Loyola (圣依纳爵堂)", desc: '免预约门票', tag: '免费', tagClass: 'tag-free' },
+                    { type: 'transport', text: '🚌 公车 51 / 85' },
+                    { type: 'spot', title: 'Colosseum (罗马斗兽场)', desc: '11月26日 预约/买票 €18', tag: '需购票', tagClass: 'tag-ticket-need' },
+                    { type: 'transport', text: '🚶 走路 5 min' },
+                    { type: 'spot', title: 'Roman Forum (古罗马广场)', desc: 'Colosseum通票', tag: '通票包含', tagClass: 'tag-ticket-done' },
+                    { type: 'transport', text: '🚶 走路 5 min' },
+                    { type: 'spot', title: 'Monument to Victor Emmanuel II / Caffetteria Italia al Vittoriano (祖国祭坛)', desc: '9月27日 预约/买票 €18', tag: '需购票', tagClass: 'tag-ticket-need' },
+                    { type: 'end', title: '回民宿' }
+                ]
+            },
+            {
+                date: "Dec-27 Sun",
+                city: "罗马 / 梵蒂冈",
+                svgMap: `
+                    <svg viewBox="0 0 400 160" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 80 80 C 120 50, 200 60, 300 70" fill="none" stroke="#10B981" stroke-width="3"/>
+                        <circle cx="80" cy="80" r="6" fill="#059669"/><text x="50" y="100" font-size="10" font-weight="700">梵蒂冈博物馆 (09:00)</text>
+                        <circle cx="180" cy="60" r="5" fill="#2563EB"/><text x="170" y="45" font-size="10" font-weight="700">圣天使城堡</text>
+                        <circle cx="300" cy="70" r="5" fill="#2563EB"/><text x="290" y="90" font-size="10" font-weight="700">翁贝托一世桥</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '民宿出发' },
+                    { type: 'spot', title: 'Vatican Museums / Sistine Chapel / Saint Peter\'s Basilica', desc: '已预约 9:00 到现场', tag: '已预约', tagClass: 'tag-ticket-done' },
+                    { type: 'transport', text: '🚶 走路 11 min' },
+                    { type: 'spot', title: "Monumento di Santa Caterina da Siena / Castel Sant'Angelo (圣天使城堡)" },
+                    { type: 'transport', text: '🚶 走路 6 min' },
+                    { type: 'spot', title: 'Ponte Umberto I (翁贝托一世桥)' }
+                ]
+            },
+            {
+                date: "Dec-28 Mon",
+                city: "那不勒斯",
+                svgMap: `
+                    <svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 80 70 L 320 70" fill="none" stroke="#2563EB" stroke-width="3" stroke-dasharray="4,4"/>
+                        <circle cx="80" cy="70" r="6" fill="#2563EB"/><text x="60" y="95" font-size="11" font-weight="700">罗马</text>
+                        <circle cx="320" cy="70" r="6" fill="#F97316"/><text x="290" y="95" font-size="11" font-weight="700">那不勒斯</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '民宿出发去火车站' },
+                    { type: 'transport', text: '🚆 火车 罗马 - 那不勒斯 (11:24 - 12:33)' },
+                    { type: 'end', title: '入住那不勒斯民宿' }
+                ]
+            },
+            {
+                date: "Dec-29 Tue",
+                city: "那不勒斯",
+                svgMap: `<svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;"><text x="130" y="75" font-size="14" fill="#64748B">那不勒斯深度游览</text></svg>`,
+                nodes: [
+                    { type: 'start', title: '那不勒斯自由活动 / 城市探索' }
+                ]
+            },
+            {
+                date: "Dec-30 Wed",
+                city: "那不勒斯",
+                svgMap: `<svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;"><text x="140" y="75" font-size="14" fill="#64748B">那不勒斯周边采风</text></svg>`,
+                nodes: [
+                    { type: 'start', title: '那不勒斯自由活动' }
+                ]
+            },
+            {
+                date: "Dec-31 Thu",
+                city: "索伦托",
+                svgMap: `
+                    <svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 100 70 L 300 70" fill="none" stroke="#F97316" stroke-width="3"/>
+                        <circle cx="100" cy="70" r="6" fill="#2563EB"/><text x="75" y="95" font-size="11" font-weight="700">那不勒斯 (11:00 取车)</text>
+                        <circle cx="300" cy="70" r="6" fill="#F97316"/><text x="270" y="95" font-size="11" font-weight="700">索伦托</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '11:00 取车' },
+                    { type: 'transport', text: '🚗 自驾 1.5h：那不勒斯 - 索伦托' },
+                    { type: 'end', title: '入住索伦托民宿' }
+                ]
+            },
+            {
+                date: "Jan-01 Fri",
+                city: "索伦托",
+                svgMap: `<svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;"><text x="130" y="75" font-size="14" fill="#64748B">索伦托休整 / 阿马尔菲海岸</text></svg>`,
+                nodes: [
+                    { type: 'start', title: '索伦托跨年休整 / 自由游览' }
+                ]
+            },
+            {
+                date: "Jan-02 Sat",
+                city: "索伦托",
+                svgMap: `<svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;"><text x="140" y="75" font-size="14" fill="#64748B">索伦托周边深度游</text></svg>`,
+                nodes: [
+                    { type: 'start', title: '索伦托周边自由活动' }
+                ]
+            },
+            {
+                date: "Jan-03 Sun",
+                city: "索伦托 ➔ 布雷达",
+                svgMap: `
+                    <svg viewBox="0 0 400 140" style="width:100%; border-radius: 8px; background: #E2E8F0;">
+                        <path d="M 50 70 L 350 70" fill="none" stroke="#2563EB" stroke-width="3" stroke-dasharray="4,4"/>
+                        <circle cx="50" cy="70" r="6" fill="#F97316"/><text x="30" y="95" font-size="11" font-weight="700">索伦托/那不勒斯</text>
+                        <circle cx="350" cy="70" r="6" fill="#2563EB"/><text x="325" y="95" font-size="11" font-weight="700">布雷达</text>
+                    </svg>
+                `,
+                nodes: [
+                    { type: 'start', title: '索伦托出发前往那不勒斯 NAP' },
+                    { type: 'transport', text: '✈️ 飞机：那不勒斯 NAP - 阿姆斯特丹 AMS' },
+                    { type: 'transport', text: '🚆 火车/交通：阿姆 AMS - Breda' },
+                    { type: 'end', title: '安全到家，圆满结束旅程！' }
+                ]
+            }
+        ];
 
-  <div class="loading-error" id="loading-error" hidden>
-    <strong>行程暂时无法载入</strong>
-    <span>请确认 trip-data.json 已通过生成校验，并与网页位于同一目录。</span>
-  </div>
+        // 动态渲染日期横向 Tab
+        function renderSlider() {
+            const slider = document.getElementById('date-slider');
+            slider.innerHTML = '';
+            daysData.forEach((d, idx) => {
+                const tab = document.createElement('div');
+                tab.className = `date-tab ${idx === 0 ? 'active' : ''}`;
+                tab.onclick = () => switchDay(idx);
+                tab.innerHTML = `
+                    <div class="tab-date">${d.date}</div>
+                    <div class="tab-city">${d.city}</div>
+                `;
+                slider.appendChild(tab);
+            });
+        }
+
+        // 切换对应天数的行程
+        function switchDay(index) {
+            const tabs = document.querySelectorAll('.date-tab');
+            tabs.forEach((tab, i) => {
+                if (i === index) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
+
+            const day = daysData[index];
+            const container = document.getElementById('timeline-container');
+
+            let html = `
+                <div class="map-box">
+                    <div class="map-title">ROUTE MAP / 当日路线图示</div>
+                    ${day.svgMap}
+                </div>
+                <div class="node-list">
+            `;
+
+            day.nodes.forEach(node => {
+                if (node.type === 'transport') {
+                    html += `
+                        <div class="node-item transport">
+                            <div class="node-dot"></div>
+                            <div class="node-transport-text">${node.text}</div>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div class="node-item">
+                            <div class="node-dot"></div>
+                            <div class="node-content">
+                                <div class="node-title-zh">${node.title}</div>
+                                ${node.desc ? `<div class="node-desc">${node.desc}</div>` : ''}
+                                ${node.tag ? `<span class="node-tag ${node.tagClass}">${node.tag}</span>` : ''}
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // 初始化加载
+        renderSlider();
+        switchDay(0);
+    </script>
 </body>
 </html>
